@@ -1,0 +1,12 @@
+<h4>Connections: <%= @flight_search['connections'] %></h4>
+
+<% @flight_search['data'].each do |flight| %>
+  <h4>Departure Airport: <%= flight['flyFrom'] %></h4>
+  <h4>Departure City: <%= flight['mapIdfrom'] %></h4>
+  <h4>Arrival Airport: <%= flight['flyTo'] %></h4>
+  <h4>Arrival City: <%= flight['mapIdto'] %></h4>
+  <h4>Price: <%= flight['price'] %></h4>
+  <h4>Duration: <%= flight['fly_duration'] %></h4>
+  <h4>Connections: <%= flight['direct_flights'] %></h4>
+  <h4>Flight Number: <%= flight['flight_no'] %></h4>
+<% end %>
