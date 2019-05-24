@@ -1,0 +1,4 @@
+<%= simple_form_for @plan do |f| %>
+  <%= f.association :city, as: :radio_buttons %>
+  <%= f.submit %>
+<% end %>
