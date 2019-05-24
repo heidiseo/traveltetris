@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_05_24_114408) do
     t.string "state"
     t.bigint "plan_id"
     t.integer "amount_cents", default: 0, null: false
-    t.string "amount_currency", default: "USD", null: false
+    t.string "amount_currency", default: "GBP", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plan_id"], name: "index_bookings_on_plan_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_05_24_114408) do
     t.datetime "arrival_date"
     t.string "flight_number"
     t.integer "price_cents", default: 0, null: false
-    t.string "price_currency", default: "USD", null: false
+    t.string "price_currency", default: "GBP", null: false
     t.bigint "departure_city_id"
     t.bigint "arrival_city_id"
     t.datetime "created_at", null: false
