@@ -1,0 +1,35 @@
+<%= simple_form_for @plan do |f| %>
+  <% if @plan.city1.blank? || @plan.city2.blank? %>
+  <%# if @plan.cities.blank? %>
+    <div class="cities-container">
+      <%#= f.association :cities, as: :check_boxes %>
+      <%= f.input :city1 %>
+      <%= f.input :city2 %>
+
+      <%= f.submit %>
+    </div>
+  <% elsif @plan.start_date1.blank? || @plan.start_date2.blank? || @plan.end_date1.blank? || @plan.end_date2.blank? %>
+  <%# elsif @plan.trip_dates.blank? %>
+    <div class="dates-container">
+      <%#= f.input :start_date %>
+      <%#= f.input :end_date %>
+      <%= f.input :start_date1 %>
+      <%= f.input :end_date1 %>
+
+      <%= f.input :start_date2 %>
+      <%= f.input :end_date2 %>
+
+      <%= f.submit %>
+    </div>
+  <% end %>
+<% end %>
+<script>
+  // const btn = document.getElementById('next-step');
+  // cities = document.querySelector('.cities-container');
+  // dates = document.querySelector('.dates-container');
+  // btn.addEventListener('click', (event) => {
+  //   cities.classList.add('d-none');
+  //   dates.classList.remove('d-none');
+  // });
+</script>
+
