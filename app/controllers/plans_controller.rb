@@ -34,7 +34,7 @@ class PlansController < ApplicationController
       # if @plan.cities.blank? || @plan.trip_dates.blank?
         redirect_to edit_plan_path(@plan)
       else
-        redirect_to plan_path(@plan)
+        redirect_to flights_index
       end
     else
       render :edit
@@ -56,6 +56,6 @@ class PlansController < ApplicationController
   def plan_params
     # params.require(:plan).permit(:city_id)
 
-    params.require(:plan).permit(:city1, :city2, :start_date1, :start_date2, :end_date1, :end_date2)
+    params.require(:plan).permit(:city_id, :city1, :city2, :start_date1, :start_date2, :end_date1, :end_date2)
   end
 end
