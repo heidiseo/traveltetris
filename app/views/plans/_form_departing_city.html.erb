@@ -1,4 +1,6 @@
 <%= simple_form_for @plan do |f| %>
-  <%= f.association :city, as: :radio_buttons %>
+  <%= f.association :city, as: :select, input_html: { class:'select2 departure' } %>
   <%= f.submit %>
 <% end %>
+
+
