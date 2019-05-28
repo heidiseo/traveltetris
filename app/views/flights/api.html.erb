@@ -3,7 +3,8 @@
 <div class="container">
   <h4>Flight Results: </h4>
     <div class= "card" style="width: 30rem;">
-      <% @flight_search['data'].each do |flight| %>
+    <% @flight_search.each do |flights| %>
+      <% flights['data'].each do |flight| %>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <% dep_time = flight['route'][0]["dTime"] %>
@@ -25,6 +26,7 @@
           </li>
         </ul>
       <% end %>
+    <% end %>
   </div>
 </div>
 
