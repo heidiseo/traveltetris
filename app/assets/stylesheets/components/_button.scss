@@ -1,0 +1,18 @@
+$tiffany: #6DDBCA;
+$grey: #9D9D9D;
+
+.btn-green-border {
+  font-family: 'Roboto', sans-serif;
+  border: 0.5mm solid $grey;
+  font-weight: lighter;
+  border-radius: 18px;
+  text-align: none;
+  padding: 16px 20px;
+  transition: .2s;
+  color: $grey;
+}
+
+.btn-green-border:hover {
+  color: #616665;
+  border: 0.5mm solid #616665;
+}
