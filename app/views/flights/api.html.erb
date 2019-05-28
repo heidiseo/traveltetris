@@ -1,12 +1,30 @@
-<h4>Connections: <%= @flight_search['connections'] %></h4>
+<% require 'date' %>
 
-<% @flight_search['data'].each do |flight| %>
-  <h4>Departure Airport: <%= flight['flyFrom'] %></h4>
-  <h4>Departure City: <%= flight['mapIdfrom'] %></h4>
-  <h4>Arrival Airport: <%= flight['flyTo'] %></h4>
-  <h4>Arrival City: <%= flight['mapIdto'] %></h4>
-  <h4>Price: <%= flight['price'] %></h4>
-  <h4>Duration: <%= flight['fly_duration'] %></h4>
-  <h4>Connections: <%= flight['direct_flights'] %></h4>
-  <h4>Flight Number: <%= flight['flight_no'] %></h4>
-<% end %>
+<div class="container">
+  <h4>Flight Results: </h4>
+    <div class= "card" style="width: 30rem;">
+      <% @flight_search['data'].each do |flight| %>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <% dep_time = flight['route'][0]["dTime"] %>
+            <% dep_time_format = DateTime.strptime(dep_time.to_s,'%s') %>
+            <% arr_time = flight['route'][0]["aTime"] %>
+            <% arr_time_format = DateTime.strptime(arr_time.to_s,'%s') %>
+            <% ret_dep_time = flight['route'][1]["dTime"] %>
+            <% ret_dep_time_format = DateTime.strptime(ret_dep_time.to_s,'%s') %>
+            <% ret_arr_time = flight['route'][1]["aTime"] %>
+            <% ret_arr_time_format = DateTime.strptime(ret_arr_time.to_s,'%s') %>
+            <p>Departure: <%= dep_time_format.strftime("%H:%M") %> <%= dep_time_format.strftime("%A") %>, <%= dep_time_format.strftime("%d") %> <%= dep_time_format.strftime("%B") %> <%= dep_time_format.strftime("%Y") %> - Arrival: <%= arr_time_format.strftime("%H:%M") %> (Airline: <%=flight['route'][0]["airline"] %>)</p>
+            <p>Returning: <%= ret_dep_time_format.strftime("%H:%M") %> <%= ret_dep_time_format.strftime("%A") %>, <%= ret_dep_time_format.strftime("%d") %> <%= ret_dep_time_format.strftime("%B") %> <%= ret_dep_time_format.strftime("%Y") %> - Arrival: <%= ret_arr_time_format.strftime("%H:%M") %> (Airline: <%= flight['route'][1]["airline"] %>)</p>
+            <p>From: <%= flight['mapIdfrom'].capitalize %> (<%= flight['flyFrom'] %>) - To: <%= flight['mapIdto'].capitalize %> (<%= flight['flyTo'] %>)</p>
+            <!-- <p>Departure City: <%#= flight['mapIdfrom'] %></p> -->
+            <!-- <p>Arrival City: <%#= flight['mapIdto'] %></p> -->
+            <p>Price: £<%= flight['price'] %></p>
+            <p>Duration: <%= flight['fly_duration'] %></p>
+            <p>Flight Number: <%= flight['route'][0]["flight_no"] %></p>
+          </li>
+        </ul>
+      <% end %>
+  </div>
+</div>
+
