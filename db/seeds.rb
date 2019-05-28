@@ -5,14 +5,13 @@ Flight.destroy_all
 City.destroy_all
 puts "seeding"
 
-city_one = City.create(name: "Paris")
-city_two = City.create(name: "Porto")
-city_three = City.create(name: "Amsterdam")
-city_four = City.create(name: "Berlin")
-city_five = City.create(name: "Dublin")
+cities = ["Amsterdam", "Bali", "Barcelona", "Belo Horizonte", "Berlin", "Bordeaux", "Brussels", "Buenos Aires", "Cali", "Casablanca","Chengdu","Copenhagen","Kyoto","Lausanne","Lille","Lisbon","London","Lyon","Marseille","Melbourne","Mexico","Milan","Montréal","Nantes","Paris","Rio de Janeiro","São Paulo","Shanghai","Shenzhen","Tel Aviv","Tokyo"];
 
-cities = [city_one, city_five, city_four, city_three, city_two]
-departure_city = City.create(name: "London")
+10.times do |x|
+  City.create(name: "#{cities[x]}")
+end
+
+departure_city = City.first
 
 flight_one = Flight.create(
   departure_city: departure_city,
