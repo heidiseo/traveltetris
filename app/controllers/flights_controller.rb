@@ -42,5 +42,7 @@ class FlightsController < ApplicationController
     flight_search_nine = JSON.parse(flights_nine)
 
     @flight_search = [flight_search_one, flight_search_two, flight_search_three, flight_search_four, flight_search_five, flight_search_six, flight_search_seven, flight_search_eight, flight_search_nine]
+
+    @airlines = JSON.parse(open('db/airline.json').read)
   end
 end
