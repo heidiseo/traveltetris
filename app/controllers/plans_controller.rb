@@ -35,9 +35,9 @@ class PlansController < ApplicationController
     if params[:trip_dates]
       start_dates = params[:trip_dates][:start_dates]
       end_dates = params[:trip_dates][:end_dates]
-      start_dates.count.times do |c|
-        departure_date = start_dates[c].values.map { |v| v.rjust(2,'0')  }.join
-        arrival_date = end_dates[c].values.map { |v| v.rjust(2,'0')  }.join
+      start_dates.size.times do |c|
+        departure_date = start_dates[c]
+        arrival_date = end_dates[c]
         TripDate.create(plan: @plan, departure_date: departure_date, arrival_date: arrival_date)
       end
     end

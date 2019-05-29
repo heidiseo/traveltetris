@@ -16,3 +16,16 @@ $grey: #9D9D9D;
   color: #616665;
   border: 0.5mm solid #616665;
 }
+
+.btn-white {
+  font-family: 'Roboto', sans-serif;
+  color: #817a7a;
+  background-color: white;
+  font-weight: lighter;
+  border-radius: 18px;
+  text-align: none;
+  padding: 16px 20px;
+  border: 1px solid $grey;
+  opacity: 1;
+}
+
