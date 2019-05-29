@@ -1,0 +1,31 @@
+$blue: #6DDBCA;
+
+
+.white-box {
+  background-color: white;
+  height: auto;
+  width: 800px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  margin-top: 16px;
+  border-radius: 5px;
+  padding-top: 48px;
+  padding-right:  16px;
+  padding-left:  16px;
+  padding-bottom:  24px;
+  margin: 12% auto;
+
+   h2 {
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    color: $blue;
+   }
+}
+
+.cities-container {
+  width: 600px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  font-size: 21px;
+
+
+}

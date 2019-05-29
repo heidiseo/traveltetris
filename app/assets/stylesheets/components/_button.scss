@@ -29,3 +29,40 @@ $grey: #9D9D9D;
   opacity: 1;
 }
 
+
+.btn-treehouse {
+  font-family: 'Roboto', sans-serif;
+  background-color: $tiffany;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  padding: 16px 25px;
+  opacity: 0.9;
+  text-align: center;
+}
+
+.btn-treehouse:hover{
+  background-color: $grey;
+  text-decoration: none !important;
+  transition: .2s;
+  transform: translateY(3px);
+  box-shadow: 2px 10px 20px rgba(1,1,1,0.2);
+  color: white;
+}
+
+.btn-treehouse:active{
+  transform: translateY(2px);
+  box-shadow: 1px 5px 10px rgba(1,1,1,0.2);
+}
+
+
+.btn-treehouse .btn-home {
+  font-family: 'Roboto', sans-serif;
+  background-color: $tiffany;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  padding: 16px 25px;
+  text-align: center;
+
+}

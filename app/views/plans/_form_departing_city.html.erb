@@ -1,6 +1,8 @@
-<%= simple_form_for @plan do |f| %>
-  <%= f.association :city, label: false, as: :select, input_html: { class:'select2 departure' } %>
-  <%= f.submit %>
-<% end %>
+<div class="departure-container">
+  <%= simple_form_for @plan do |f| %>
+    <%= f.association :city, label: false, as: :select, input_html: { class:'select2 departure' } %>
+    <%= f.button :submit, "Create plan", class:"btn-treehouse btn-home" %>
+  <% end %>
+</div>
 
 
