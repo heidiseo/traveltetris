@@ -3,6 +3,7 @@ require 'open-uri'
 
 class FlightsController < ApplicationController
   skip_before_action :authenticate_user!
+  skip_after_action :verify_authorized
   def api
     skip_authorization
     @plan = Plan.find(params[:plan_id])
