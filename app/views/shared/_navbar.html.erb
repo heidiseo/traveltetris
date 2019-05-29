@@ -1,11 +1,11 @@
-<% color = params[:controller] == 'pages' && params[:action] == 'home' ? 'transparent' : '#6DDBCA'%>
-<% position = params[:controller] == 'pages' && params[:action] == 'home' ? 'absolute' : 'initial' %>
+<% color = params[:controller] == 'plans' && params[:action] == 'new' ? 'transparent' : '#6DDBCA'%>
+<% position = params[:controller] == 'plans' && params[:action] == 'new' ? 'absolute' : 'initial' %>
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon" style="background-color: <%= color %>; position: <%= position %>;">
 
   <div class="d-flex align-items-start main-brand">
     <div class="navbar-brand">
-      <div class="d-flex justify-content-start">
-        <%= link_to root_path, class:"nav-link" do %>
+      <div class="d-flex justify-content-start left-part">
+        <%= link_to root_path, class:"logo" do %>
           <i class="fas fa-globe-americas text-white"></i>
         <% end %>
          <p class= "logo text-white"> TravelTetris</p>

@@ -5,6 +5,7 @@
 
   // background-image: linear-gradient(to right, #FF7010, #FFD50B);
   opacity: 0.9;
+  z-index: 1;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -22,4 +23,11 @@
 
 .dropdown-list {
   z-index: 1;
+}
+
+.left-part {
+  align-items: center;
+  p {
+    margin-bottom: 0px;
+  }
 }
