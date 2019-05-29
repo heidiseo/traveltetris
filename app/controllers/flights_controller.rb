@@ -24,9 +24,9 @@ class FlightsController < ApplicationController
             departure_city = City.find_by(name: route['cityFrom'].capitalize) || City.create(name: route['cityFrom'].capitalize)
             arrival_city = City.find_by(name: route['cityTo'].capitalize) || City.create(name: route['cityTo'].capitalize)
             dep_time = route["dTime"]
-            dep_time_format = DateTime.strptime(dep_time,'%s')
+            dep_time_format = DateTime.strptime(dep_time.to_s,'%s')
             arr_time = route["aTime"]
-            arr_time_format = DateTime.strptime(arr_time,'%s')
+            arr_time_format = DateTime.strptime(arr_time.to_s,'%s')
             flight = Flight.find_by(departure_city: departure_city, departure_date: date.departure_date, arrival_city: arrival_city, arrival_date: date.arrival_date, price_cents: price, flight_number: route['flight_no']) || Flight.create(departure_city: departure_city, departure_date: date.departure_date, arrival_city: arrival_city, arrival_date: date.arrival_date, price_cents: price, flight_number: route['flight_no'], full_departure_date: dep_time_format, full_arrival_date: arr_time_format)
             @flights << flight
           end
