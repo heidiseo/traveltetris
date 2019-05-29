@@ -4,4 +4,8 @@ class FlightPolicy < ApplicationPolicy
       scope.all
     end
   end
+
+  def api?
+    true
+  end
 end
