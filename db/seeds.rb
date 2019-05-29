@@ -7,8 +7,8 @@ Flight.destroy_all
 City.destroy_all
 puts "seeding"
 
-cities = ["Amsterdam", "Bali", "Barcelona", "Belo Horizonte", "Berlin", "Bordeaux", "Brussels", "Buenos Aires", "Cali", "Casablanca","Chengdu","Copenhagen","Kyoto","Lausanne","Lille","Lisbon","London","Lyon","Marseille","Melbourne","Mexico","Milan","Montréal","Nantes","Paris","Rio de Janeiro","São Paulo","Shanghai","Shenzhen","Tel Aviv","Tokyo"];
-
+# cities = ["Amsterdam", "Bali", "Barcelona", "Belo Horizonte", "Berlin", "Bordeaux", "Brussels", "Buenos Aires", "Cali", "Casablanca","Chengdu","Copenhagen","Kyoto","Lausanne","Lille","Lisbon","London","Lyon","Marseille","Melbourne","Mexico","Milan","Montréal","Nantes","Paris","Rio de Janeiro","São Paulo","Shanghai","Shenzhen","Tel Aviv","Tokyo"];
+cities = ['Alicante', 'Amsterdam', 'Athens', 'Barcelona', 'Bari', 'Basel', 'Belfast', 'Belgrade', 'Bergen', 'Berlin', 'Bilbao', 'Birmingham', 'Bologna', 'Bordeaux', 'Bristol', 'Brussels', 'Bucharest', 'Budapest', 'Cagliari', 'Catania', 'Charleroi', 'Cologne', 'Copenhagen', 'Derby', 'Dublin', 'Düsseldorf', 'Edinburgh', 'Eindhoven', 'Faro', 'Frankfurt', 'Gdańsk', 'Geneva', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hanover', 'Helsinki', 'Heraklion', 'Ibiza', 'Istanbul', 'Katowice', 'Kiev', 'Kraków', 'Krasnodar', 'Lisbon', 'Liverpool', 'London', 'Lyon', 'Madrid', 'Málaga', 'Malta', 'Manchester', 'Marseille', 'Milan', 'Minsk', 'Moscow', 'Munich', 'Nantes', 'Naples', 'Nice', 'Nuremberg', 'Oslo', 'Palermo', 'Palma de Mallorca', 'Paris', 'Pisa', 'Porto', 'Prague', 'Reykjavík', 'Rhodes', 'Riga', 'Rome', 'Saint Petersburg', 'Seville', 'Simferopol', 'Sofia', 'Stavanger', 'Stockholm', 'Stuttgart', 'Thessaloniki', 'Toulouse', 'Trondheim', 'Valencia', 'Venice', 'Vienna', 'Vilnius', 'Warsaw', 'Zürich']
 cities.count.times do |x|
   city = City.new(name: "#{cities[x]}")
   url = "https://api.teleport.org/api/urban_areas/slug:#{city.name.gsub(' ', '-')}/images/"
