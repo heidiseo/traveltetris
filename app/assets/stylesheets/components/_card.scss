@@ -1,0 +1,39 @@
+.cards{
+  margin: 20px auto auto auto;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+  width: 50%;
+}
+
+.card {
+  background-color: #6DDBCA;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 75px;
+}
+
+// .card-grey {
+//   background-color: #9D9D9D;
+//   display: flex !important;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+.card-body {
+  width: 170px;
+  height: 70px;
+}
+
+.card-columns {
+  display: inline-grid;
+  margin: 50px 20px !important;
+}
+
+.card-deck {
+  background-color: rgba(109,219,202,.5);
+  width: 220px;
+  height: 300px;
+}
