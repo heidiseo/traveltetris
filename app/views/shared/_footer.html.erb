@@ -1,0 +1,11 @@
+<% color = params[:controller] == 'plans' && params[:action] == 'new' ? 'transparent' : '#6DDBCA'%>
+<% position = params[:controller] == 'plans' && params[:action] == 'new' ? 'absolute' : 'initial' %>
+<div class="footer footer-expand-sm footer-light footer-lewagon" style="background-color: <%= color %>; position: <%= position %>;">
+  <div class="footer-links">
+    <a href="#"><i class="fab fa-github"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+  </div>
+</div>
