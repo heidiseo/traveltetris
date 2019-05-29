@@ -4,63 +4,163 @@
   <title>We're sorry, but something went wrong (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+     main {
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+        background-size: cover;
+        animation: fadein 4s;
+        -webkit-filter:brightness(.9);
+        filter:brightness(.9);
+        width:100%; height:100vh; display:inline-block; position:relative;
+    }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    .rails-default-error-page {
+      background-image: url('https://images.pexels.com/photos/5412/water-blue-ocean.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')no-repeat center center;
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+    }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    .loading {
+      text-transform: uppercase;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 100pt;
+      text-align: center;
+      height: 120px;
+      line-height: 110px;
+      vertical-align: bottom;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100px;
+      bottom: 0;
+      display: block;
+    }
+
+    @keyframes wave-animation {
+      0% {
+        background-position: 0 bottom;
+      }
+      100% {
+        background-position: 200px bottom;
+      }
+    }
+
+    @keyframes loading-animation {
+      0% {
+        background-size: 200px 0px;
+      }
+      100% {
+        background-size: 200px 200px;
+      }
+    }
+
+    .wave {
+      background-image: url("http://vignette4.wikia.nocookie.net/camphalfbloodroleplay/images/b/bb/Large-wave-divider.png");
+      -moz-background-clip: text;
+      -o-background-clip: text;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0px 0px rgba(155, 255, 255, 0.06);
+      animation: wave-animation 3s infinite linear, loading-animation 4s infinite linear alternate;
+      background-size: 200px 100px;
+      background-repeat: repeat-x;
+      opacity: 1;
+    }
+
+    .not-found {
+      text-align: center;
+      font-size: 55px;
+      margin-top: 350px;
+      font-family: Arial;
+      animation: wave-animation 2.5s infinite linear, loading-animation 10s infinite linear alternate;
+    }
+
+    .search {
+      display: block;
+      margin-top: 50px;
+      margin-left: -20px;
+      width: 100%;
+    }
+
+    .search-container {
+      width: 490px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    input#search-bar {
+      margin: 0 auto;
+      width: 100%;
+      height: 45px;
+      padding: 0 20px;
+      font-size: 1rem;
+      border: 1px solid #D0CFCE;
+      outline: none;
+      &:focus {
+        border: 1px solid #008ABF;
+        transition: 0.35s ease;
+        color: #008ABF;
+        &::-webkit-input-placeholder {
+          transition: opacity 0.45s ease;
+          opacity: 0;
+        }
+        &::-moz-placeholder {
+          transition: opacity 0.45s ease;
+          opacity: 0;
+        }
+        &:-ms-placeholder {
+          transition: opacity 0.45s ease;
+          opacity: 0;
+        }
+      }
+    }
+
+    .search-icon {
+      position: relative;
+      float: right;
+      width: 75px;
+      height: 75px;
+      top: -62px;
+      right: -45px;
+    }
+
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    /* Firefox < 16 */
+
+    @-moz-keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    /* Safari, Chrome and Opera > 12.1 */
+
+    @-webkit-keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   </style>
+
 </head>
 
 <body class="rails-default-error-page">
   <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
+   <div class="not-found wave">
+    Page Not Found
   </div>
 </body>
 </html>
