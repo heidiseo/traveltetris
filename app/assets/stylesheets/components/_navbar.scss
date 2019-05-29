@@ -1,12 +1,25 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  padding: 10px 50px;
+  width: 100%;
+
+  // background-image: linear-gradient(to right, #FF7010, #FFD50B);
+  opacity: 0.9;
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
+.navbar-lewagon .navbar-brand i {
   width: 40px;
+  font-size: 30px;
+}
+
+.navbar-brand{
+  position: relative;
+}
+
+.dropdown-list {
+  z-index: 1;
 }
