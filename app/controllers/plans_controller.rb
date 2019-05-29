@@ -28,7 +28,6 @@ class PlansController < ApplicationController
   end
 
   def update
-    @plan = Plan.find(params[:id])
     if params[:plan]
       @cities = params[:plan][:city_ids].reject(&:blank?).map { |id| City.find(id) }
       @plan.cities = @cities
@@ -44,7 +43,7 @@ class PlansController < ApplicationController
     end
     if @plan.save
       if @plan.cities.any? && @plan.trip_dates.any?
-        redirect_to api_flights_path
+        redirect_to api_plan_flights_path(@plan)
       else
         redirect_to edit_plan_path(@plan)
       end
