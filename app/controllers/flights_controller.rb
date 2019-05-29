@@ -4,7 +4,6 @@ require 'open-uri'
 class FlightsController < ApplicationController
   skip_before_action :authenticate_user!
   def api
-    
 
     @plan = Plan.find(params[:plan_id])
     @flights = []
