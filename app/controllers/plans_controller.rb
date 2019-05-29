@@ -28,18 +28,44 @@ class PlansController < ApplicationController
   end
 
   def update
-
-    if @plan.update(plan_params)
-      if @plan.city1.blank? || @plan.city2.blank? || @plan.start_date1.blank? || @plan.start_date2.blank? || @plan.end_date1.blank? || @plan.end_date2.blank?
-      # if @plan.cities.blank? || @plan.trip_dates.blank?
-        redirect_to edit_plan_path(@plan)
+    if params[:plan]
+      @cities = params[:plan][:city_ids].reject(&:blank?).map { |id| City.find(id) }
+      @plan.cities = @cities
+    end
+    if params[:trip_dates]
+      start_dates = params[:trip_dates][:start_dates]
+      end_dates = params[:trip_dates][:end_dates]
+      start_dates.count.times do |c|
+        departure_date = start_dates[c].values.map { |v| v.rjust(2,'0')  }.join
+        arrival_date = end_dates[c].values.map { |v| v.rjust(2,'0')  }.join
+        TripDate.create(plan: @plan, departure_date: departure_date, arrival_date: arrival_date)
+      end
+    end
+    if @plan.save
+      if @plan.cities.any? && @plan.trip_dates.any?
+        redirect_to api_plan_flights_path(@plan)
       else
-        redirect_to flights_index
+        redirect_to edit_plan_path(@plan)
       end
     else
       render :edit
     end
   end
+
+
+  # def update
+  #   if @plan.update(plan_params)
+  #     @cities = params[:plan][:city_ids].reject(&:blank?).map { |id| City.find(id) }
+  #     @plan.cities = @cities
+  #     if @plan.cities.blank? || @plan.trip_dates.blank?
+  #       redirect_to edit_plan_path(@plan)
+  #     else
+  #       redirect_to api_flights_path
+  #     end
+  #   else
+  #     render :edit
+  #   end
+  # end
 
   def destroy
     @plan.destroy
@@ -54,8 +80,6 @@ class PlansController < ApplicationController
   end
 
   def plan_params
-    # params.require(:plan).permit(:city_id)
-
-    params.require(:plan).permit(:city_id, :city1, :city2, :start_date1, :start_date2, :end_date1, :end_date2)
+    params.require(:plan).permit(:city_id)
   end
 end
