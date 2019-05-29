@@ -7,9 +7,9 @@
         </div>
     <% else %>
       <%= simple_form_for :trip_dates, url: plan_path(@plan), method: :patch do |f| %>
-        <% @plan.cities.count.times do |count| %>
-          <%= f.input 'start_dates[]', as: :date %>
-          <%= f.input 'end_dates[]', as: :date %>
+        <% @plan.cities.size.times do |count| %>
+          <%= f.input 'start_dates', as: :string, input_html: {class: "datepicker-#{count}", id: "start-date-#{count}", name: 'trip_dates[start_dates][]'} %>
+          <%= f.input 'end_dates', as: :string, input_html: {class: "datepicker-#{count} end-date-#{count}", id: "end-date-#{count}", name: 'trip_dates[end_dates][]'} %>
         <% end %>
         <%= f.submit %>
       <% end %>
