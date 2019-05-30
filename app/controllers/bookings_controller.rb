@@ -1,4 +1,7 @@
 class BookingsController < ApplicationController
+  skip_after_action :verify_policy_scoped
+  def index
+    skip_authorization
 
   def new
   end
@@ -12,5 +15,4 @@ class BookingsController < ApplicationController
 
   def update
   end
-
 end
