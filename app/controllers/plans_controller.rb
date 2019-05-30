@@ -15,7 +15,9 @@ class PlansController < ApplicationController
 
   def create
     @plan = Plan.new(plan_params)
-    @plan.user = current_user
+    if current_user
+      @plan.user = current_user
+    end
     authorize @plan
     if @plan.save
       redirect_to edit_plan_path(@plan)
