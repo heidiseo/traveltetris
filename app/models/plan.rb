@@ -1,5 +1,5 @@
 class Plan < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :city
   has_many :plan_cities, dependent: :destroy
   has_many :cities, through: :plan_cities
