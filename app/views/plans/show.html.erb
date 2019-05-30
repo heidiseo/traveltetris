@@ -1,4 +1,5 @@
 
+
 <div class="rain">
   <div class="containeir">
     <div class="confirmation-box">
@@ -1165,3 +1166,8 @@
 
 
 </div>
+
+<%= content_for :meta_title, "#{@plan.user.email}'s plan to visit #{@plan.city_id} from #{@plan.cities}" %>
+<% content_for :meta_description, "Leaving on #{@plan.start_date1}, returning on #{@plan.end_date1} to #{@plan.city1}" %>
+<% content_for :meta_image, @plan.city.photo %>
+

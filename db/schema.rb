@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_29_143304) do
+ActiveRecord::Schema.define(version: 2019_05_30_111622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(version: 2019_05_29_143304) do
     t.string "amount_currency", default: "GBP", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name_passenger"
+    t.string "last_name_passenger"
+    t.string "passport"
+    t.string "nationality"
+    t.date "dob"
     t.index ["plan_id"], name: "index_bookings_on_plan_id"
   end
 
@@ -34,15 +39,10 @@ ActiveRecord::Schema.define(version: 2019_05_29_143304) do
   end
 
   create_table "flight_bookings", force: :cascade do |t|
-    t.string "first_name_passenger"
-    t.string "last_name_passenger"
-    t.string "passport"
-    t.string "nationality"
     t.bigint "booking_id"
     t.bigint "flight_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "dob"
     t.index ["booking_id"], name: "index_flight_bookings_on_booking_id"
     t.index ["flight_id"], name: "index_flight_bookings_on_flight_id"
   end
@@ -77,12 +77,6 @@ ActiveRecord::Schema.define(version: 2019_05_29_143304) do
     t.bigint "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "city1"
-    t.string "city2"
-    t.datetime "start_date1"
-    t.datetime "end_date1"
-    t.datetime "start_date2"
-    t.datetime "end_date2"
     t.index ["city_id"], name: "index_plans_on_city_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
@@ -104,6 +98,7 @@ ActiveRecord::Schema.define(version: 2019_05_29_143304) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "full_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
