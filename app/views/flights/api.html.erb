@@ -2,7 +2,7 @@
 <div class="container">
 
   <div class="no-results">
-    <% if @warning %>
+    <% unless @warning.blank? %>
       <p>We are sorry, no flights were found.</p>
     <% end %>
   </div>
@@ -15,7 +15,8 @@
       <p>Arrival city: <%= flight.arrival_city.name %></p>
       <p>Price: <%= flight.price_cents %></p>
       <p>Flight #: <%= flight.flight_number %></p>
-      <p><%= flight.full_departure_date %></p>
+      <p>Flight full departure date:<%= flight.full_departure_date %></p>
+      <p>Flight full arrival date:<%= flight.full_arrival_date %></p>
     <% end %>
   </div>
 </div>
