@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :set_plan, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :authenticate_user!, only: [:new]
   def index
     @plans = policy_scope(Plan)
   end
@@ -15,7 +15,9 @@ class PlansController < ApplicationController
 
   def create
     @plan = Plan.new(plan_params)
-    @plan.user = current_user
+    if current_user
+      @plan.user = current_user
+    end
     authorize @plan
     if @plan.save
       redirect_to edit_plan_path(@plan)

@@ -3,7 +3,7 @@ import "flatpickr/dist/flatpickr.min.css"
 import rangePlugin from "flatpickr/dist/plugins/rangePlugin.js"
 
 
-['0', '1', '2'].forEach((i) => {
+['0', '1', '2', '3'].forEach((i) => {
   flatpickr(`.datepicker-${i}`, {
     mode: 'range',
     plugins: [new rangePlugin({ input: `.end-date-${i}`})],
