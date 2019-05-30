@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :set_plan, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :authenticate_user!, only: [:new]
   def index
     @plans = policy_scope(Plan)
   end
