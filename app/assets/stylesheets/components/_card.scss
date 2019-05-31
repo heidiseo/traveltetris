@@ -1,31 +1,48 @@
 .cards{
   margin: 20px auto auto auto;
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 16px;
-  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
 }
 
-.card {
-  background-color: #6DDBCA;
+.date-card {
+  background-color: #D4F3EF;
   display: flex !important;
   justify-content: center;
   align-items: center;
   height: 75px;
+  width: 250px;
 }
 
-// .card-grey {
-//   background-color: #9D9D9D;
-//   display: flex !important;
-//   justify-content: center;
-//   align-items: center;
-// }
+.flight-card {
+  background-color: #D4F3EF;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 250px;
+  // height: 75px;
+}
 
 .card-body {
-    width: 200px;
-    height: 100px;
-    margin: auto;
+  width: 200px;
+  height: 50px;
+  margin: auto;
+  display: flex;
+  padding: 5px !important;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.card-body-date {
+  width: 200px;
+  height: 75px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-columns {
