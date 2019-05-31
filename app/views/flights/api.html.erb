@@ -42,26 +42,40 @@
 
     <!--    Modal  PopUp-->
 
-              <div class="modal fade" id="exampleModalLong<%= flight.id %>" data-id="<%= flight.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Flight Info</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+              <div class="modal fade bd-example-modal-lg" id="exampleModalLong<%= flight.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div style="position: relative; width: 100%;">
+                    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1495562569060-2eec283d3391?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)">
+                      <button type="button" class="close" style="color:black; font-size: 32px; padding-right:8px;" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                      <div class="modal-body">
-                          <%= flight.departure_city.name %>
-                          <%= flight.departure_date %>
-                          <%= flight.arrival_city.name %>
-                           <%= flight.arrival_date %>
-                          <%= flight.price_cents  %>
-                      </div>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary select">Select</button>
+                      <div class="card-flight">
+                        <div class="card-flight-font">
+                          <h2>Departing flight- <%=flight.departure_date %></h2>
+                          <div class="card-flight-details">
+                            <p>6:30- <%= flight.departure_city.name %></p>
+                            <div class="d-flex">
+                              <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
+                              <p class="px-3">Travel time: 2 h 10 min</p>
+                            </div>
+                            <p>8:40- <%= flight.arrival_city.name %></p>
+                          </div>
+                          <br>
+                          <h2>Returning flight- <%= flight.arrival_date %></h2>
+                          <div class="card-flight-details">
+                            <p>21:40 -<%= flight.arrival_city.name %></p>
+                            <div class="d-flex">
+                              <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
+                              <p class="px-3">Travel time: 2 h 10 min</p>
+                            </div>
+                            <p>23:40 -<%= flight.departure_city.name %></p>
+                            <div class="card-total-price">
+                              <strong><h5>Total- <%= flight.price_cents%>£</h5></strong>
+                            </div>
+                          </div>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -97,3 +111,4 @@
       });
     });
   </script>
+
