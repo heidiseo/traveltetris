@@ -97,6 +97,7 @@ class FlightsController < ApplicationController
       end
     end
     @airlines = JSON.parse(open('db/airline.json').read)
+    # binding.pry
   end
 
   def show
