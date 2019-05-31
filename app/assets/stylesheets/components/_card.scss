@@ -69,7 +69,7 @@
   // text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  width: 900px;
+  width: 100%;
   margin: 5% auto;
   position: relative
 }
@@ -82,11 +82,11 @@
   height: 500px;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  width: 700px;
+  width: 90%;
   position: absolute;
   z-index: 1;
-  bottom: 100px;
-  right: 366px;
+  top: 88px;
+  left: 5%;
 
 }
 
@@ -97,5 +97,11 @@
 
 .card-flight-details {
   padding-left: 16px;
+}
+
+.card-total-price {
+position: absolute;
+bottom: 24px;
+right: 56px;
 
 }
