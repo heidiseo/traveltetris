@@ -1,6 +1,8 @@
+
 <div class="container">
   <div class="white-box">
         <%= simple_form_for @plan do |f| %>
+
         <% if @plan.cities.blank? %>
 
             <h2 class="text-center">Choose your destinations</h2>
@@ -16,9 +18,11 @@
             <%= f.input 'start_dates', as: :string, input_html: {class: "datepicker-#{count}", id: "start-date-#{count}", name: 'trip_dates[start_dates][]'} %>
             <%= f.input 'end_dates', as: :string, input_html: {class: "datepicker-#{count} end-date-#{count}", id: "end-date-#{count}", name: 'trip_dates[end_dates][]'} %>
           <% end %>
-            <%= f.button :submit, "Submit", class:"btn-treehouse" %>
 
+            <%= f.button :submit, "Submit", class:"btn-treehouse" %>
+          <% end %>
         <% end %>
-    <% end %>
-  <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
