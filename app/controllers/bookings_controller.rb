@@ -15,8 +15,9 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new
     authorize @booking
+    raise
     if @booking.save
-      flight_bookings.create()
+      # flight_bookings.create()
       redirect_to edit_booking_path(@booking)
     else
       render :new

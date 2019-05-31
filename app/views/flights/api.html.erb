@@ -31,10 +31,8 @@
 
   <!--       Main Button -->
 
-            <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight.id %>" >
+            <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight.id %>" data-flightid="<%= flight.id %>" >
               <div class="card-body my-3">
-
-                <p class="card-text-city m-0 p-0"><%= flight.departure_city.name%></p>
 
                 <p class="card-text-city m-0 p-0"><%= flight.arrival_city.name%></p>
 
@@ -43,6 +41,7 @@
             </button>
 
     <!--    Modal  PopUp-->
+
 
               <div class="modal fade bd-example-modal-lg" id="exampleModalLong<%= flight.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
@@ -83,7 +82,6 @@
               </div>
 <!--
             end of Modal Body
-
  -->
 
           <% end %>
@@ -99,5 +97,18 @@
 
     </div>
   </div>
-  <%= link_to "Book",  new_booking_path, class:"btn-treehouse"%>
+  <%= link_to "Book",  new_booking_path(plan: @plan.id), class:"btn-treehouse"%>
+
+  <script>
+    var selectButtons = document.querySelectorAll(".btn.select");
+    selectButtons.forEach((selectButton) => {
+      selectButton.addEventListener("click", (event) => {
+        var flightId = event.currentTarget.parentNode.parentNode.parentNode.parentNode.dataset.id;
+        var flight = document.querySelector(`button[data-flightid='${flightId}']`);
+        flight.classList.add("selected");
+        var closeBtn = event.currentTarget.parentNode.parentNode.firstElementChild.lastElementChild;
+        closeBtn.click();
+      });
+    });
+  </script>
 
