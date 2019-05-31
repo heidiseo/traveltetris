@@ -4,6 +4,7 @@
       <p>We are sorry, no flights were found.</p>
     <% end %>
   </div>
+
   <div class="flight-info">
     <div class="d-flex justify-content-around my-3">
       <% @going_flights.each do |date, flights| %>
@@ -26,19 +27,12 @@
     <div class="d-flex justify-content-around my-3">
       <% @going_flights.each do |d, flights| %>
         <div class="flight-card">
-          <% flights.sort_by(&:price_cents).each do |flight| %>
-            <div class="card-body my-3">
-              <p class="card-text m-0 p-0"><%= flight.arrival_city.name  %></p>
-              <p class="card-text m-0 p-0">£ <%= flight.price_cents %></p>
-            </div>
           <% flights.each do |flight| %>
 
   <!--       Main Button -->
 
-            <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight.id %>" >
+            <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight.id %>" data-flightid="<%= flight.id %>" >
               <div class="card-body my-3">
-
-                <p class="card-text-city m-0 p-0"><%= flight.departure_city.name%></p>
 
                 <p class="card-text-city m-0 p-0"><%= flight.arrival_city.name%></p>
 
@@ -48,7 +42,7 @@
 
     <!--    Modal  PopUp-->
 
-              <div class="modal fade" id="exampleModalLong<%= flight.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+              <div class="modal fade" id="exampleModalLong<%= flight.id %>" data-id="<%= flight.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -67,14 +61,13 @@
 
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Book</button>
+                      <button type="button" class="btn btn-primary select">Select</button>
                     </div>
                   </div>
                 </div>
               </div>
 <!--
             end of Modal Body
-
  -->
 
           <% end %>
@@ -92,4 +85,15 @@
   </div>
   <%= link_to "Book",  new_booking_path(plan: @plan.id), class:"btn-treehouse"%>
 
-
+  <script>
+    var selectButtons = document.querySelectorAll(".btn.select");
+    selectButtons.forEach((selectButton) => {
+      selectButton.addEventListener("click", (event) => {
+        var flightId = event.currentTarget.parentNode.parentNode.parentNode.parentNode.dataset.id;
+        var flight = document.querySelector(`button[data-flightid='${flightId}']`);
+        flight.classList.add("selected");
+        var closeBtn = event.currentTarget.parentNode.parentNode.firstElementChild.lastElementChild;
+        closeBtn.click();
+      });
+    });
+  </script>
