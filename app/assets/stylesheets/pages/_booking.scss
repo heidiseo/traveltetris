@@ -1,3 +1,6 @@
+$tiffany: #6DDBCA;
+$grey: #9D9D9D;
+
 
 .booking-title {
   margin: 30px auto;
@@ -7,4 +10,33 @@
   // border: 5px solid red;
   background-color: #9D9D9D;
   opacity: .65;
+}
+
+.price {
+  border: 1px solid #6DDBCA;
+}
+
+.btn-pay {
+  font-family: 'Roboto', sans-serif;
+  background-color: $tiffany;
+  font-weight: bold;
+  color: white;
+  padding: 16px 25px;
+  opacity: 0.9;
+  text-align: center;
+}
+
+.total-price {
+  font-family: 'Roboto', sans-serif;
+  background-color: white;
+  font-weight: bold;
+  color: #4B4C4C;
+  padding: 16px 25px;
+  opacity: 0.9;
+  text-align: center;
+}
+
+.price-next {
+  position: -webkit-sticky;
+  position: sticky;
 }
