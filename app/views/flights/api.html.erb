@@ -6,7 +6,7 @@
   </div>
 
   <div class="flight-info">
-    <div class="d-flex justify-content-around my-3">
+    <div class="d-flex justify-content-center my-3">
       <% @going_flights.each do |date, flights| %>
         <% dep_time_format = Date.parse(date) %>
         <% arr_time_format = flights.first.arrival_date %>
@@ -24,66 +24,74 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-around my-3">
+    <div class="d-flex justify-content-center my-3">
 
-      <% @combs_with_price.each do |flights| %>
-        <%#= raise %>
-        <div class="flight-card">
-          <% flights[:flights].each do |flight_pair| %>
+        <div>
+          <% @combs_with_price.each do |flights| %>
+          <%#= raise %>
 
-  <!--       Main Button -->
+            <div class="flight-card-destinations">
+              <% flights[:flights].each do |flight_pair| %>
 
-            <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight_pair[0].id %>" data-flightid="<%= flight_pair[0].id %>" >
-              <div class="card-body my-3">
-
-                <p class="card-text-city m-0 p-0"><%= flight_pair[0].arrival_city.name%></p>
-
-                <p class="card-text-city m-0 p-0">£ <%= flight_pair[0].price_cents %></p>
-                <p class="card-text-city m-0 p-0">£ <%= flights[:price] %></p>
-              </div>
-            </button>
-
-    <!--    Modal  PopUp-->
-
-
-              <div class="modal fade" id="exampleModalLong<%= flight_pair[0].id %>" data-id="<%= flight_pair[0].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Flight Info</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <p>going</p>
-                        <%= flight_pair[0].departure_city.name %>
-                        <%= flight_pair[0].departure_date %>
-                        <%= flight_pair[0].arrival_city.name %>
-                         <%= flight_pair[0].arrival_date %>
-                        <%= flight_pair[0].price_cents  %>
-                        <p>re</p>
-                         <%= flight_pair[1].departure_city.name %>
-                        <%= flight_pair[1].departure_date %>
-                        <%= flight_pair[1].arrival_city.name %>
-                         <%= flight_pair[1].arrival_date %>
-                        <%= flight_pair[1].price_cents  %>
-                    </div>
-
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary select">Select flight</button>
-                    </div>
+      <!--       Main Button -->
+                <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight_pair[0].id %>" data-flightid="<%= flight_pair[0].id %>" >
+                  <div class="card-body my-3">
+                    <span class="card-text-city m-0 p-0"><%= flight_pair[0].arrival_city.name%></span>
+                    <span class="card-text-city m-0 p-0">£ <%= flight_pair[0].price_cents %></span>
                   </div>
+                </button>
+
+        <!--    Modal  PopUp-->
+
+
+                  <div class="modal fade" id="exampleModalLong<%= flight_pair[0].id %>" data-id="<%= flight_pair[0].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Flight Info</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>going</p>
+                            <%= flight_pair[0].departure_city.name %>
+                            <%= flight_pair[0].departure_date %>
+                            <%= flight_pair[0].arrival_city.name %>
+                             <%= flight_pair[0].arrival_date %>
+                            <%= flight_pair[0].price_cents  %>
+                            <p>re</p>
+                             <%= flight_pair[1].departure_city.name %>
+                            <%= flight_pair[1].departure_date %>
+                            <%= flight_pair[1].arrival_city.name %>
+                             <%= flight_pair[1].arrival_date %>
+                            <%= flight_pair[1].price_cents  %>
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary select">Select flight</button>
+                        </div>
+                      </div>
+                    </div>
+
+       <!--    end of modal popup -->
+
                 </div>
-              </div>
+              <% end %>
+            </div>
+
+        <% end %>
+      </div>
+
+      <div class="flight-card d-flex justify-content-between"">
+          <% @combs_with_price.each do |flights| %>
+            <% flights[:flights].each do |flight_pair| %>
             <% end %>
-        </div>
-      <% end %>
-      <div class="flight-card">
-        <div class="card-body">
-          <p class="card-text">TEST</p>
-        </div>
+              <div class="card-body-total my-3">
+                <strong><p class="card-text">£ <%= flights[:price]%></p></strong>
+              </div>
+          <% end %>
       </div>
     </div>
    </div>
@@ -99,7 +107,7 @@
     selectButtons.forEach((selectButton) => {
       selectButton.addEventListener("click", (event) => {
         console.log(event.currentTarget);
-        var flightId = event.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode.dataset.id;
+        var flightId = event.currentTarget.parentNode.parentNode.parentNode.parentNode.dataset.id;
         var flight = document.querySelector(`button[data-flightid='${flightId}']`);
         if (flight.classList.contains('selected')) {
           flight.classList.remove("selected");
