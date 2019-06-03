@@ -7,10 +7,7 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @flights_ids = params[:flight].split(",") # -> return string
-    # split the string by comma into array
-    # iterete over rarray with each
-    # find flight instance with .find and id
+    @flights_ids = params[:flight].split(",")
     @flights = []
     @flights_ids.each do |flight_combo|
       flight_combo = flight_combo.split("|")
@@ -23,9 +20,7 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new
     authorize @booking
-    raise
     if @booking.save
-      # flight_bookings.create()
       redirect_to edit_booking_path(@booking)
     else
       render :new
