@@ -12,8 +12,9 @@ class BookingsController < ApplicationController
     # iterete over rarray with each
     # find flight instance with .find and id
     @flights = []
-    @flights_ids.each do |flight_id|
-      @flights << Flight.find(flight_id)
+    @flights_ids.each do |flight_combo|
+      flight_combo = flight_combo.split("|")
+      @flights << [Flight.find(flight_combo[0]), Flight.find(flight_combo[1])]
     end
     @booking = Booking.new
     authorize @booking
