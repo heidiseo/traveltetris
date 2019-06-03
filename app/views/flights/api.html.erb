@@ -25,7 +25,9 @@
     </div>
 
     <div class="d-flex justify-content-around my-3">
-      <% @going_flights.each do |d, flights| %>
+      <% @combs_with_price.each do |flights| %>
+        <%= flights %>
+        <%#= raise %>
         <div class="flight-card">
           <% flights.each do |flight| %>
 
@@ -37,6 +39,7 @@
                 <p class="card-text-city m-0 p-0"><%= flight.arrival_city.name%></p>
 
                 <p class="card-text-city m-0 p-0">£ <%= flight.price_cents %></p>
+                <p class="card-text-city m-0 p-0">£ <%= flights[:price] %></p>
               </div>
             </button>
 
