@@ -4,10 +4,17 @@ class BookingsController < ApplicationController
 
   def index
     @booking = Booking.all
-    authorize @booking
   end
 
   def new
+    @flights_ids = params[:flight].split(",") # -> return string
+    # split the string by comma into array
+    # iterete over rarray with each
+    # find flight instance with .find and id
+    @flights = []
+    @flights_ids.each do |flight_id|
+      @flights << Flight.find(flight_id)
+    end
     @booking = Booking.new
     authorize @booking
   end
