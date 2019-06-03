@@ -56,7 +56,7 @@
 
     <!--    Modal  PopUp-->
 
-              <div class="modal fade" id="exampleModalLong<%= flight_pair[0].id %>" data-id="<%= flight_pair[0].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+              <div class="modal fade" id="exampleModalLong<%= flight_pair[0].id %>" data-id="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -81,8 +81,8 @@
 
                     </div>
                     <p class="pl-3">  Price: £<%= flight_pair[1].price_cents  %></p>
-                    
-                    
+
+
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary select">Select flight</button>
