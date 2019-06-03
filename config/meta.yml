@@ -1,5 +1,5 @@
 meta_product_name: "TravelTetris"
 meta_title: "TravelTetris | Cheapeast Flight Combinations"
 meta_description: "Choose multiple citis you want to visit and free dates, we show you where you should go for each date with the cheapest deal"
-meta_image: "Coverphoto.jpeg" # should exist in `app/assets/images/`
+meta_image: "coverphoto.jpg" # should exist in `app/assets/images/`
 # twitter_account: "@product_twitter_account"   # required for Twitter Cards
