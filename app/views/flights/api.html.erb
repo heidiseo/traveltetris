@@ -26,26 +26,25 @@
 
     <div class="d-flex justify-content-around my-3">
       <% @combs_with_price.each do |flights| %>
-        <%= flights %>
         <%#= raise %>
         <div class="flight-card">
-          <% flights.each do |flight| %>
+          <% flights[:flights].each do |flight_pair| %>
 
   <!--       Main Button -->
 
-            <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight.id %>" data-flightid="<%= flight.id %>" >
+            <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight_pair[0].id %>" data-flightid="<%= flight_pair[0].id %>" >
               <div class="card-body my-3">
 
-                <p class="card-text-city m-0 p-0"><%= flight.arrival_city.name%></p>
+                <p class="card-text-city m-0 p-0"><%= flight_pair[0].arrival_city.name%></p>
 
-                <p class="card-text-city m-0 p-0">£ <%= flight.price_cents %></p>
+                <p class="card-text-city m-0 p-0">£ <%= flight_pair[0].price_cents %></p>
                 <p class="card-text-city m-0 p-0">£ <%= flights[:price] %></p>
               </div>
             </button>
 
     <!--    Modal  PopUp-->
 
-              <div class="modal fade" id="exampleModalLong<%= flight.id %>" data-id="<%= flight.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+              <div class="modal fade" id="exampleModalLong<%= flight_pair[0].id %>" data-id="<%= flight_pair[0].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -55,11 +54,18 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                        <%= flight.departure_city.name %>
-                        <%= flight.departure_date %>
-                        <%= flight.arrival_city.name %>
-                         <%= flight.arrival_date %>
-                        <%= flight.price_cents  %>
+                      <p>going</p>
+                        <%= flight_pair[0].departure_city.name %>
+                        <%= flight_pair[0].departure_date %>
+                        <%= flight_pair[0].arrival_city.name %>
+                         <%= flight_pair[0].arrival_date %>
+                        <%= flight_pair[0].price_cents  %>
+                        <p>re</p>
+                         <%= flight_pair[1].departure_city.name %>
+                        <%= flight_pair[1].departure_date %>
+                        <%= flight_pair[1].arrival_city.name %>
+                         <%= flight_pair[1].arrival_date %>
+                        <%= flight_pair[1].price_cents  %>
                     </div>
 
                     <div class="modal-footer">

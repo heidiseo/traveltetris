@@ -46,50 +46,6 @@ class FlightsController < ApplicationController
                 end
               end
             end
-
-
-
-            # combinations => array of arrays
-            # each combination will be an element of the combination array
-            # each combination has flights instances
-            # can't have combination with flights with same location
-            # get the first flight in the first key and go to the next keys and
-            # find a different flight
-
-            # flight_in_first_column = ""
-            # flight_in_second_column = ""
-            # counter = 0
-            # @going_flights.each do |d, flights|
-            #   arrOfArrFlights << flights
-            # end
-
-            # arrOfArrFlights.each do |arr_flights|
-            #   arr_flights
-            # end
-
-
-            # @combinations = []
-            # array_of_flights = @going_flights.values
-            # @going_flights.each do |d, flights|
-            #   @comb = []
-            #   # @comb << d.flights.select(flight) unless c
-            #   # @comb << flight unless @comb[d.flights.first]
-            #   # @comb << d.flights.reject { |flight| IT ALREADY EXISTS}
-            #   flights.each do |flight|
-            #     @comb << flight unless @comb[flight]
-            #   end
-            # end
-            # @combinations << @comb
-
-            # array_of_flights.each do |flights_at_date|
-            #   flights_at_date.each do |flight|
-            #     other_flights = flights_at_date - [flight]
-            #     sum = flight.price_cents + other_flights.each do |other_flight|
-            #       other_flight.price_cents
-            #     end
-            #   end
-            # end
-
           else
             @warning = 'No flights found'
           end
@@ -122,7 +78,11 @@ class FlightsController < ApplicationController
       p cities
     end
     @combs_with_price = combs_sorted.map do |comb|
-      result = { flights: comb }
+      comb_with_return = comb.map do |flight|
+        return_flight = @returning_flights[flight.arrival_date.to_s].find { |r_flight| r_flight.departure_city == flight.arrival_city }
+        [flight, return_flight]
+      end
+      result = { flights: comb_with_return }
       price = comb.map(&:price_cents).sum
       result[:price] = price
       result
