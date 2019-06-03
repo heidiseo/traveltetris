@@ -47,6 +47,8 @@ class FlightsController < ApplicationController
               end
             end
 
+
+
             # combinations => array of arrays
             # each combination will be an element of the combination array
             # each combination has flights instances
@@ -96,6 +98,37 @@ class FlightsController < ApplicationController
         puts e.message
       end
     end
+    flights = @going_flights.map { |_key, value| value }.flatten
+    combs = []
+    flights.each do |flight|
+      comb = []
+      comb << flight
+      flights.each do |flight1|
+        unless comb.any? { |f| f.departure_date == flight1.departure_date || f.arrival_city == flight1.arrival_city }
+          comb << flight1
+        end
+      end
+      combs << comb
+    end
+    combs_sorted = []
+    combs.each do |combination|
+      combs_sorted << combination.sort_by(&:departure_date)
+    end
+    combs_sorted = combs_sorted.uniq { |combi| combi.map(&:id).join('') }
+    p combs_sorted
+    p combs_sorted.size
+    combs_sorted.each do |comb|
+      cities = comb.map(&:arrival_city_id)
+      p cities
+    end
+    @combs_with_price = combs_sorted.map do |comb|
+      result = { flights: comb }
+      price = comb.map(&:price_cents).sum
+      result[:price] = price
+      result
+    end
+    @combs_with_price.sort_by! { |comb| comb[:price] }
+    p @combs_with_price
     @airlines = JSON.parse(open('db/airline.json').read)
     # binding.pry
   end
