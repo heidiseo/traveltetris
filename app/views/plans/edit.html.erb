@@ -1,28 +1,32 @@
 
 <div class="container">
   <div class="white-box">
-        <%= simple_form_for @plan do |f| %>
-
-        <% if @plan.cities.blank? %>
-
-            <h2 class="text-center">Choose your destinations</h2>
-
-            <div class="cities-container">
-              <%= f.association :cities, as: :select, collection: City.all, input_html: { class:'select2'} %>
-              <%= f.button :submit, "Submit", class:"btn-treehouse" %>
-            </div>
-        <% else %>
+    <%= simple_form_for @plan do |f| %>
+      <%if @plan.cities.blank? %>
+        <h2 class="text-center">Choose your destinations</h2>
+        <div class="cities-container">
+        <%= f.association :cities, as: :select, collection: City.all, input_html: { class:'select2'} %>
+        <%= f.button :submit, "Submit", class:"btn-treehouse" %>
+        </div>
+      <% else %>
         <h2 class="text-center">Choose your available dates</h2>
         <%= simple_form_for :trip_dates, url: plan_path(@plan), method: :patch do |f| %>
           <% @plan.cities.size.times do |count| %>
-            <%= f.input 'start_dates', as: :string, input_html: {class: "datepicker-#{count}", id: "start-date-#{count}", name: 'trip_dates[start_dates][]'} %>
-            <%= f.input 'end_dates', as: :string, input_html: {class: "datepicker-#{count} end-date-#{count}", id: "end-date-#{count}", name: 'trip_dates[end_dates][]'} %>
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <%= f.input 'start_dates', as: :string, input_html: {class: "datepicker-#{count}", id: "start-date-#{count}", name: 'trip_dates[start_dates][]'} %>
+                </div>
+                <div class="col">
+                 <%= f.input 'end_dates', as: :string, input_html: {class: "datepicker-#{count} end-date-#{count}", id: "end-date-#{count}", name: 'trip_dates[end_dates][]'} %>
+                </div>
+              </div>
+            </div>
           <% end %>
-
-            <%= f.button :submit, "Submit", class:"btn-treehouse" %>
-          <% end %>
-        <% end %>
+        <div class="mx-3"><%= f.button :submit, "Submit", class:"btn-treehouse" %></div>
       <% end %>
-    </div>
+    <% end %>
+   <% end %>
   </div>
 </div>
+
