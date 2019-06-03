@@ -1,0 +1,82 @@
+$tiffany: #6DDBCA;
+$grey: #9D9D9D;
+
+.flight {
+  // margin-top: 8%;
+  animation: moveInRight 10s infinite;
+  animation-timing-function: linear;
+  color: $grey;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 32px;
+
+
+}
+
+.flight img {
+  position: relative;
+}
+
+
+
+
+
+@keyframes moveInRight{
+  0% {
+    opacity: 0;
+    transform: translateX(1000px);
+  }
+
+  25% {
+    opacity: 0.7;
+    transform: translateX(500px);
+
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: translateX(250px);
+
+  }
+
+  75% {
+    opacity: 0.9;
+    transform: translateX(100px);
+
+  }
+
+  90% {
+    opacity: 0.1;
+    transform: translateX(50px);
+
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(0px);
+
+  }
+
+// @keyframes moveInLeft {
+//   0% {
+//     opacity: 0;
+//     transform: translateX(-100px);
+//   }
+
+
+//   80% {
+//     transform: translateX(10px);
+//   }
+
+//   100% {
+//     opacity: 1;
+//     transform: translate(0px);
+
+
+
+//   }
+
+
+// }
+
+}
