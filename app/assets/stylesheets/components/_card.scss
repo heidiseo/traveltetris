@@ -39,7 +39,7 @@
 .card-body-date {
   width: 200px;
   height: 75px;
-  margin: auto;
+  margin: 0 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -104,4 +104,8 @@
 position: absolute;
 bottom: 24px;
 right: 56px;
+}
+
+.modal-footer{
+  z-index:500;
 }
