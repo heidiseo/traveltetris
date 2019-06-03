@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_154234) do
+ActiveRecord::Schema.define(version: 2019_06_03_165202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_154234) do
     t.string "passport"
     t.string "nationality"
     t.date "dob"
+    t.string "email"
     t.index ["plan_id"], name: "index_bookings_on_plan_id"
   end
 
@@ -57,8 +58,8 @@ ActiveRecord::Schema.define(version: 2019_06_03_154234) do
     t.bigint "arrival_city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "full_departure_date"
-    t.integer "full_arrival_date"
+    t.string "full_departure_date"
+    t.string "full_arrival_date"
     t.string "duration"
     t.index ["arrival_city_id"], name: "index_flights_on_arrival_city_id"
     t.index ["departure_city_id"], name: "index_flights_on_departure_city_id"
