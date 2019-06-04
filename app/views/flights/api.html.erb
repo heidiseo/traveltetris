@@ -71,7 +71,7 @@
                               <%= DateTime.strptime(flight_pair[num].full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].arrival_city.name %>
                             </p>
                           <% end %>
-                          <p class="pl-3">  Price: £<%= flight_pair[1].price_cents  %></p>
+                          <p class="pl-3">  Price: £<%= humanized_money_with_symbol(flight_pair[1].price_cents) %></p>
                         </div>
 
                         <div class="modal-footer">
