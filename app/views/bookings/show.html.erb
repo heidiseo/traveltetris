@@ -1,5 +1,8 @@
 <h1>summary of passenger details and selected flights</h1>
 <p>price stripe</p>
-<%= @booking %>
-<%= raise %>
+<% @booking.flights.each do |flight| %>
+  <%= flight.flight_number %>
+<% end %>
+<%= @booking.first_name_passenger %>
+<%#= raise %>
 <%= link_to "Confirm", confirmation_booking_path(@booking) %>

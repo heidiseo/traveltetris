@@ -35,7 +35,7 @@
     </div>
     <div class="m-3 price-next", style="background-color: white; border: 1px solid grey">
       <p class="total-price">Total price: <%= counter %>£</p>
-      <%= link_to "Proceed with booking",  bookings_path(plan_id: params[:plan]), method: :post, class:"btn-pay"%>
+      <%= link_to "Proceed with booking",  bookings_path(plan_id: params[:plan], flight_ids: params[:flight]), method: :post, class:"btn-pay"%>
 
     </div>
   </div>
