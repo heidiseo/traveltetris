@@ -25,11 +25,6 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new
     @booking.plan_id = params[:plan_id]
-    @counter = 0
-    @booking.flights.each do |price|
-      @counter += price.flight.price
-    end
-    @booking.amount_cents = @counter
     authorize @booking
     if @booking.save
       @flights = params[:flight_ids].split(",")
@@ -37,11 +32,17 @@ class BookingsController < ApplicationController
         @flight_pair = []
         flight.split("|").each { |flight| @booking.flight_bookings << FlightBooking.create!(flight_id: flight, booking_id: @booking.id)}
       end
+    @counter = 0
+    @booking.flights.each do |flight|
+      @counter += flight.price_cents
+    end
+    @booking.amount_cents = @counter * 100 / 2
+    @booking.save
       redirect_to edit_booking_path(@booking)
-
     else
       render :new
     end
+
   end
 
   def edit
