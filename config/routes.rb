@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'plans#new'
-  resources :bookings
+  resources :bookings do
+    resources :payments, only: [:create]
+  end
 
   resources :plans do
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
