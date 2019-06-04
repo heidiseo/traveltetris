@@ -21,22 +21,47 @@ $grey: #9D9D9D;
   background-color: $tiffany;
   font-weight: bold;
   color: white;
-  padding: 16px 25px;
+  // padding: 16px 25px;
   opacity: 0.9;
   text-align: center;
+  transition: .2s;
+  &:hover {
+    opacity: 1;
+  }
 }
+
 
 .total-price {
   font-family: 'Roboto', sans-serif;
   background-color: white;
   font-weight: bold;
-  color: #4B4C4C;
+  // color: #4B4C4C;
+  color: black;
   padding: 16px 25px;
   opacity: 0.9;
   text-align: center;
+  margin: 0px;
 }
 
 .price-next {
-  position: -webkit-sticky;
+  top: 0px;
   position: sticky;
+  height: 40px;
+}
+
+.flights {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-column-gap: 20px;
+}
+
+.booking-link {
+  background-color: $tiffany;
+  margin: 0px;
+  padding: 16px 25px;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+
 }
