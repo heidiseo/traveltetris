@@ -1,8 +1,9 @@
 class PaymentsController < ApplicationController
-  # before_action :set_booking
+  before_action :set_booking
+
 
   def create
-    customer = Stripe::Customer.create(
+      customer = Stripe::Customer.create(
     source: params[:stripeToken],
     email:  params[:stripeEmail]
   )
@@ -15,7 +16,9 @@ class PaymentsController < ApplicationController
     )
 
     @booking.update(payment: charge.to_json, state: 'paid')
+    authorize @booking
     redirect_to confirmation_booking_path(@booking)
+
   rescue Stripe::CardError => e
     flash[:alert] = e.message
     redirect_to booking_payments_path(@booking)
@@ -24,6 +27,6 @@ class PaymentsController < ApplicationController
   private
 
   def set_booking
-    # @booking = current_user.plans.where(state: 'pending').find(params[:booking_id])
+    @booking = Booking.find(params[:booking_id])
   end
 end
