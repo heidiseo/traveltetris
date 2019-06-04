@@ -6,7 +6,7 @@
         <h2 class="text-center">Choose your destinations</h2>
         <div class="cities-container">
         <%= f.association :cities, as: :select, collection: City.all, input_html: { class:'select2'} %>
-        <%= f.button :submit, "Submit", class:"btn-treehouse" %>
+        <div class="my-3 submit-btn-center"><%= f.button :submit, "Submit", class:"btn-treehouse" %></div>
         </div>
       <% else %>
         <h2 class="text-center">Choose your available dates</h2>
@@ -23,7 +23,7 @@
               </div>
             </div>
           <% end %>
-        <div class="mx-3"><%= f.button :submit, "Submit", class:"btn-treehouse" %></div>
+        <div class="my-3 submit-btn-center"><%= f.button :submit, "Submit", class:"btn-treehouse" %></div>
       <% end %>
     <% end %>
    <% end %>
