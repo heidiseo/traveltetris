@@ -1,0 +1,37 @@
+ <div class="modal fade" id="exampleModalLong<%= flight_pair[0].id %>" data-id="<%= flight_pair[0].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Flight Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% [0, 1].each do |num| %>
+          <p>
+            <%= num == 0 ? "Departing flight -" : "Arriving flight -"  %>
+            <%= flight_pair[num].departure_date.strftime("%A, %d %B %Y") %>
+          </p>
+          <p>
+            <i class="far fa-circle" style="font-size: 1em"></i>
+            <%= DateTime.strptime(flight_pair[num].full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].departure_city.name %>
+          </p>
+          <div class="d-flex">
+            <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
+            <p class="px-3">Travel time: <%= flight_pair[num].duration %></p>
+          </div>
+          <p>
+            <i class="far fa-circle" style="font-size: 1em"></i>
+            <%= DateTime.strptime(flight_pair[num].full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].arrival_city.name %>
+          </p>
+        <% end %>
+        <p class="pl-3">  Price: £<%= flight_pair[1].price_cents  %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary select">Select flight</button>
+      </div>
+    </div>
+  </div>
+</div>
