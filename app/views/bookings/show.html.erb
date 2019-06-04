@@ -2,7 +2,7 @@
 <h1>Trip Details</h1>
 
 <h3>Flight information</h3>
-
+<% counter = 0 %>
 <% @booking.flights.each_with_index do |flight, index| %>
   <div style="border: 1px solid black">
     <p>
@@ -24,6 +24,7 @@
     <p>Flight <%= flight.flight_number %></p>
     <% if index.odd? %>
       <p class="pl-3">Price: <%= flight.price_cents  %>£</p>
+      <% counter += flight.price_cents  %>
     <% end %>
   </div>
 <% end %>
@@ -58,7 +59,7 @@
 <%= form_tag booking_payments_path(@booking) do %>
   <article>
     <label class="amount">
-      <span>Amount: <%= humanized_money_with_symbol(@booking.amount) %></span>
+      <span>Amount: <%= humanized_money_with_symbol(counter) %></span>
     </label>
   </article>
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
