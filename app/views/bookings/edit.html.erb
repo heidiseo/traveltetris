@@ -1,7 +1,7 @@
 <!-- <h2>Sign in to earn points</h2> -->
 <%#= render "devise/registrations/edit.html.erb" %>
 <div class="container">
-<h2 class="text-center">Traveller Details</h2>
+<h2 class="text-center my-3">Traveller Details</h2>
 <p class="text-center">Traveller details must match government-issued photo ID exactly.</p>
 
 <%= simple_form_for @booking do |f| %>
@@ -11,7 +11,9 @@
   <%= f.input :passport %>
   <%= f.input :nationality %>
   <%= f.input :dob, label: "Date of birth" %>
-  <%= f.button :submit, "Proceed with booking", class:"btn-treehouse btn-home m-14 center" %>
+  <div class="booking-btn my-3">
+    <%= f.button :submit, "Proceed with booking", class:"btn-treehouse btn-home m-14" %>
+  </div>
 <% end %>
 
 </div>
