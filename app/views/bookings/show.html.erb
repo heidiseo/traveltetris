@@ -43,7 +43,7 @@
 <%#= raise %>
 
 
-<%= link_to "Confirm", confirmation_booking_path(@booking) %>
+<%#= link_to "Confirm", confirmation_booking_path(@booking) %>
 
 
 
@@ -68,6 +68,7 @@
     data-email="<%= current_user.email %>"
     data-description="blank"
     data-amount="<%= @booking.amount_cents %>"
+    <% raise %>
     data-currency="<%= @booking.amount.currency %>"></script>
 
 <% end %>
