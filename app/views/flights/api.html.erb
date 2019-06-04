@@ -29,7 +29,6 @@
         <%#= raise %>
         <div class="flight-card">
           <% flights[:flights].each do |flight_pair| %>
-            <% binding.pry %>
   <!--       Main Button -->
 
             <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight_pair[0].id %>" data-flightid="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>" >
