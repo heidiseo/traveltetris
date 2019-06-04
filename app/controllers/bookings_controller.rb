@@ -6,6 +6,11 @@ class BookingsController < ApplicationController
     @booking = Booking.all
   end
 
+  def show
+    @booking = Booking.find(params[:id])
+    authorize @booking
+  end
+
   def new
     @flights_ids = params[:flight].split(",")
     @flights = []
