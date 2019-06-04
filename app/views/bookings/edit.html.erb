@@ -1,17 +1,16 @@
 <h2>Sign in to earn points</h2>
-<%= render "../devise/registrations/edit.html.erb" %>
+<%#= render "devise/registrations/edit.html.erb" %>
 
 <h2>Traveller Details</h2>
 <p>Traveller details must match government-issued photo ID exactly.</p>
 
 <%= simple_form_for @booking do |f| %>
-  <%= f.input :title } %>
-  <%= f.input :first_name } %>
-  <%= f.input :last_name } %>
-  <%= f.input :email } %>
-  <%= f.input :passport } %>
-  <%= f.input :nationality } %>
-  <%= f.input :date_of_birth } %>
+  <%= f.input :first_name_passenger %>
+  <%= f.input :last_name_passenger %>
+  <%= f.input :email %>
+  <%= f.input :passport %>
+  <%= f.input :nationality %>
+  <%= f.input :dob %>
   <%= f.button :submit, "Proceed with booking", class:"btn-treehouse btn-home" %>
 <% end %>
 
