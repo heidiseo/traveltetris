@@ -4,7 +4,8 @@
     <div class="flights-2">
 
 
-        <% @counter = 0 %>
+      <% @counter = 0 %>
+
       <% @booking.flights.each_slice(2) do |a, b|  %>
 
         <div class="boarding-card">
@@ -27,8 +28,6 @@
             <div class="total-cost">
                 <p class="m-0 p-1">Roundtrip: <%= a.price_cents  %>£</p>
                 <% @counter += a.price_cents %>
-
-
             </div>
         </div>
       <% end %>
