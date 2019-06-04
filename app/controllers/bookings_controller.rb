@@ -19,6 +19,7 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new
+    @booking.plan_id = params[:plan_id]
     authorize @booking
     if @booking.save
       redirect_to edit_booking_path(@booking)
@@ -27,7 +28,9 @@ class BookingsController < ApplicationController
     end
   end
 
-  def edit #edit_booking_path
+  def edit
+    @booking = Booking.find(params[:id])
+    authorize @booking
   end
 
   def update
@@ -49,6 +52,6 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:title, :first_name, :last_name, :email, :passport, :nationality, :dob)
+    params.require(:booking).permit(:first_name_passenger, :last_name_passenger, :email, :passport, :nationality, :dob)
   end
 end

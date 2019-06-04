@@ -8,35 +8,34 @@
         <div class="flight summary-card">
           <div class="">
             <div>
-              <h3>Departing flight Departure date<%= flight_pair[0].departure_date %></h3>
-              <p>Arrival date<%= flight_pair[0].arrival_date %></p>
-              <p>full dep <%= flight_pair[0].full_departure_date %></p>
-              <p>full arrival<%= flight_pair[0].full_arrival_date %></p>
-              <p>flight number<%= flight_pair[0].flight_number %></p>
-              <p>departure city id<%= flight_pair[0].departure_city.name %></p>
-              <p>arrival city id <%= flight_pair[0].arrival_city.name %></p>
+              <p>Departing flight - <%= flight_pair[0].departure_date.strftime("%A, %d %B %Y") %> </p>
+              <p><i class="far fa-circle" style="font-size: 1em"></i> <%= DateTime.strptime(flight_pair[0].full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[0].departure_city.name %></p>
+              <div class="d-flex">
+                <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
+                <p class="px-3">Travel time: <%= flight_pair[0].duration %></p>
+                <%# raise %>
+              </div>
+              <p><i class="far fa-circle" style="font-size: 1em"></i> <%= DateTime.strptime(flight_pair[0].full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[0].arrival_city.name %></p>
             </div>
 
             <div>
-              <h3>Returning flight</h3>
-              <p><%= flight_pair[0].departure_date.strftime("%A, %d %B %Y") %></p>
-              <p><%= DateTime.strptime(flight_pair[0].full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[0].departure_city.name %></p>
-              <p><i class="fas fa-ellipsis-v">  Flight </i><%= flight_pair[1].flight_number %></p>
-
-              <p><%= DateTime.strptime(flight_pair[0].full_arrival_date.to_s,'%s').strftime("%H:%M") %> -<%= flight_pair[0].arrival_city.name %></p>
-              <p><%= flight_pair[1].arrival_date %>- <%= flight_pair[1].arrival_city.name %></p>
-              <p>full dep <%= flight_pair[1].full_departure_date %></p>
-              <p>full arrival<%= flight_pair[1].full_arrival_date %></p>
+              <p>Returning flight - <%= flight_pair[0].departure_date.strftime("%A, %d %B %Y") %> </p>
+              <p><i class="far fa-circle" style="font-size: 1em"></i> <%= DateTime.strptime(flight_pair[0].full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[0].departure_city.name %></p>
+              <div class="d-flex">
+                <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
+                <p class="px-3">Travel time: <%= flight_pair[0].duration %></p>
+                <%# raise %>
+              </div>
+              <p><i class="far fa-circle" style="font-size: 1em"></i> <%= DateTime.strptime(flight_pair[0].full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[0].arrival_city.name %></p>
             </div>
           </div>
           <h3 class="price">Roundtrip Price: <%= flight_pair[1].price_cents %><%= flight_pair[1].price_currency %></h3>
         </div>
-        <% end %>
-
+      <% end %>
     </div>
     <div class="m-3 price-next", style="background-color: white; border: 1px solid grey">
       <p class="total-price">Total price: <%= counter %>£</p>
-      <%= link_to "Proceed with booking",  bookings_path(Booking.new), class:"btn-pay"%>
+      <%= link_to "Proceed with booking",  bookings_path(plan_id: params[:plan]), method: :post, class:"btn-pay"%>
 
     </div>
   </div>
