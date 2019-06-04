@@ -1,76 +1,60 @@
+<div class="container">
+  <h1 class="text-center my-3">Trip Details</h1>
+  <div class="flights">
+    <div class="flights-2">
 
-<h1>Trip Details</h1>
 
-<h3>Flight information</h3>
-<% counter = 0 %>
-<% @booking.flights.each_with_index do |flight, index| %>
-  <div style="border: 1px solid black">
-    <p>
-      <% index.even? ? "Departing flight -" : "Arriving flight -" %>
-      <%= flight.departure_date.strftime("%A, %d %B %Y") %>
-    </p>
-    <p>
-      <i class="far fa-circle" style="font-size: 1em"></i>
-      <%= DateTime.strptime(flight.full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight.departure_city.name %>
-    </p>
-    <div class="d-flex">
-      <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
-      <p class="px-3">Travel time: <%= flight.duration %></p>
+      <% @booking.flights.each_slice(2) do |a, b|  %>
+
+        <div class="boarding-card">
+          <div class="details">
+              <div class="departing flight-details">
+                  <h3><%= a.departure_city.name %> - <%= a.arrival_city.name %></h3>
+                  <p><%= a.departure_date.strftime("%A, %d %B %Y") %></p>
+                  <p><%= DateTime.strptime(a.full_departure_date.to_s,'%s').strftime("%H:%M") %></p>
+                  <p>Duration: <%= a.duration %></p>
+                  <p>Flight <%= a.flight_number %></p>
+              </div>
+              <div class="returning flight-details">
+                  <h3><%= b.departure_city.name %> - <%= b.arrival_city.name %></h3>
+                  <p><%= b.departure_date.strftime("%A, %d %B %Y") %></p>
+                  <p><%= DateTime.strptime(b.full_departure_date.to_s,'%s').strftime("%H:%M") %></p>
+                  <p>Duration: <%= b.duration %></p>
+                  <p>Flight <%= b.flight_number %></p>
+              </div>
+            </div>
+            <div class="total-cost">
+                <p class="m-0 p-1">Roundtrip: <%= a.price_cents  %>£</p>
+            </div>
+        </div>
+      <% end %>
+      <br>
+      <h3>Passenger details</h3>
+      <br>
+      <p>First name: <%= @booking.first_name_passenger %></p>
+      <p>Last name: <%= @booking.last_name_passenger %></p>
+      <p>Email: <%= @booking.email %></p>
+      <p>Passport: <%= @booking.passport %></p>
+      <p>Nationality: <%= @booking.nationality %></p>
+      <p>Date of Birth: <%= @booking.dob %></p>
     </div>
-    <p>
-      <i class="far fa-circle" style="font-size: 1em"></i>
-      <%= DateTime.strptime(flight.full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight.arrival_city.name %>
-    </p>
-    <p>Flight <%= flight.flight_number %></p>
-    <% if index.odd? %>
-      <p class="pl-3">Price: <%= flight.price_cents  %>£</p>
-      <% counter += flight.price_cents  %>
-    <% end %>
+    <div class="price-next", style="background-color: white;">
+      <%= form_tag booking_payments_path(@booking) do %>
+        <article>
+          <label class="amount">
+            <span>Amount: <%= humanized_money_with_symbol(counter) %></span>
+          </label>
+        </article>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-name="Plan: <%= @booking.plan.id %>"
+          data-email="<%= current_user.email %>"
+          data-description="blank"
+          data-amount="<%= @booking.amount_cents %>"
+          data-currency="<%= @booking.amount.currency %>"></script>
+      <% end %>
+    </div>
   </div>
-<% end %>
-
-
-
-<h3>Passenger details</h3>
-<p>First name: <%= @booking.first_name_passenger %></p>
-<p>Last name: <%= @booking.last_name_passenger %></p>
-<p>Email: <%= @booking.email %></p>
-<p>Passport: <%= @booking.passport %></p>
-<p>Nationality: <%= @booking.nationality %></p>
-<p>Date of Birth: <%= @booking.dob %></p>
-
-
-<%#= raise %>
-
+</div>
 
 <%#= link_to "Confirm", confirmation_booking_path(@booking) %>
-
-
-
-
-
-
-
-
-
-
-
-
-<%= form_tag booking_payments_path(@booking) do %>
-  <article>
-    <label class="amount">
-      <span>Amount: <%= humanized_money_with_symbol(counter) %></span>
-    </label>
-  </article>
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-    data-name="Plan: <%= @booking.plan.id %>"
-    data-email="<%= current_user.email %>"
-    data-description="blank"
-    data-amount="<%= @booking.amount_cents %>"
-    <% raise %>
-    data-currency="<%= @booking.amount.currency %>"></script>
-
-<% end %>
-
-
