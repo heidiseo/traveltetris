@@ -25,7 +25,10 @@
     </div>
 
 
-    <div class="d-flex justify-content-center my-3">
+    <div class="d-flex justify-content-center my-3 anchor">
+      <div class="flight-highlighter">
+        <p class="best-deal"><strong>Best Deal</strong></p>
+      </div>
 
         <div>
           <% @combs_with_price.each do |flights| %>
@@ -33,12 +36,20 @@
               <% flights[:flights].each do |flight_pair| %>
 
       <!--       Main Button -->
-                <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight_pair[0].id %>" data-flightid="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>" >
-                  <div class="card-body my-3">
-                    <span class="card-text-city m-0 p-0"><%= flight_pair[0].arrival_city.name%></span>
-                    <span class="card-text-city m-0 p-0">£ <%= flight_pair[0].price_cents %></span>
-                  </div>
-                </button>
+                <table class="table table-hover city-table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight_pair[0].id %>" data-flightid="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>" >
+                          <div class="card-body my-3">
+                            <span class="card-text-city m-0 p-0"><%= flight_pair[0].arrival_city.name%></span>
+                            <span class="card-text-city m-0 p-0">£ <%= flight_pair[0].price_cents %></span>
+                          </div>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
 
         <!--    Modal  PopUp-->
 
@@ -86,7 +97,6 @@
                 </div>
               <% end %>
             </div>
-
         <% end %>
       </div>
 
@@ -94,18 +104,54 @@
           <% @combs_with_price.each do |flights| %>
             <% flights[:flights].each do |flight_pair| %>
             <% end %>
-              <div class="card-body-total my-3">
-                <strong><p class="card-text">£ <%= flights[:price]%></p></strong>
-              </div>
+            <table class="table table-hover high-z-index">
+              <tbody>
+                <tr>
+                  <td>
+                    <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
+                      <div class="card-body-total my-3">
+                        <strong><p class="card-text">£ <%= flights[:price]%></p></strong>
+                      </div>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           <% end %>
+
+         <!-- *******************price modal********************** -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+     <!--  **********************end price modal*********************** -->
       </div>
     </div>
    </div>
   </div>
-
+  <br>
+    <div class="d-flex justify-content-center">
+      <%= link_to "Book", new_booking_path(plan: @plan.id), onclick: "addFlights()", id:"book-btn", class:"btn-treehouse" %>
+    </div>
+  <br>
 </div>
 
-  <%= link_to "Book", new_booking_path(plan: @plan.id), onclick: "addFlights()", id:"book-btn", class:"btn-treehouse" %>
 
   <script>
 
