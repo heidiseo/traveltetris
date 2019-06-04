@@ -14,6 +14,11 @@
   width: 250px;
 }
 
+.flight-bestdeal-bar{
+  background-color: #D4F3EF;
+  width: 400px;
+}
+
 .flight-card {
   background-color: #D4F3EF;
   flex-direction: column;
@@ -24,11 +29,12 @@
 }
 
 .flight-card-destinations {
-  background-color: #D4F3EF;
-  display: flex;
+  // background-color: #D4F3EF;
+  // display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  z-index: 2;
 }
 
 .card-body {
@@ -154,4 +160,10 @@
   padding: 0 25px;
   background-color: #D4F3EF;
   min-width: 200px;
+}
+
+.card-highlights {
+  width: 500px;
+  height: 30px;
+  opacity: .7;
 }
