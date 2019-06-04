@@ -45,6 +45,7 @@ class PlansController < ApplicationController
     end
     if @plan.save
       if @plan.cities.any? && @plan.trip_dates.any?
+        # binding.pry
         redirect_to api_plan_flights_path(@plan)
       else
         redirect_to edit_plan_path(@plan)
