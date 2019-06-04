@@ -42,7 +42,7 @@
       <%= form_tag booking_payments_path(@booking) do %>
         <article>
           <label class="amount">
-            <span>Amount: <%= humanized_money_with_symbol(counter) %></span>
+            <span>Amount: <%= humanized_money_with_symbol(@counter) %></span>
           </label>
         </article>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
