@@ -25,6 +25,11 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new
     @booking.plan_id = params[:plan_id]
+    @counter = 0
+    @booking.flights.each do |price|
+      @counter += price.flight.price
+    end
+    @booking.amount_cents = @counter
     authorize @booking
     if @booking.save
       @flights = params[:flight_ids].split(",")
