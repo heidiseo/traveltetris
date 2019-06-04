@@ -27,7 +27,13 @@ class BookingsController < ApplicationController
     @booking.plan_id = params[:plan_id]
     authorize @booking
     if @booking.save
+      @flights = params[:flight_ids].split(",")
+      @flights.each do |flight|
+        @flight_pair = []
+        flight.split("|").each { |flight| @booking.flight_bookings << FlightBooking.create!(flight_id: flight, booking_id: @booking.id)}
+      end
       redirect_to edit_booking_path(@booking)
+
     else
       render :new
     end
@@ -46,7 +52,16 @@ class BookingsController < ApplicationController
     end
   end
 
-  def destroy
+  def show
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    # redirect_to confirmation_bookings_path(@booking)
+  end
+
+  def confirmation
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    # redirect_to root_path
   end
 
   private

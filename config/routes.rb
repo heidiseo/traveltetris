@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'plans#new'
   resources :bookings do
+
     resources :payments, only: [:create]
+    member do
+      get 'confirmation'
+    end
   end
 
   resources :plans do
