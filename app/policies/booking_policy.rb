@@ -9,6 +9,10 @@ class BookingPolicy < ApplicationPolicy
     true
   end
 
+  def confirmation?
+    show?
+  end
+
   def update?
     show?
   end
