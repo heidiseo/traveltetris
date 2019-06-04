@@ -102,3 +102,38 @@ a:hover {
   align-items: center;
   justify-content: center;
 }
+
+.anchor {
+  position: relative;
+  background-color: #D4F3EF;
+  // z-index: 0;
+}
+
+.flight-highlighter {
+  width: 120%;
+  height: 75px;
+  position: absolute;
+  top: 17px;
+  left: -70px;
+  background: #6DDBCA;
+  // z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+
+.best-deal {
+  padding: 0 20px;
+  margin: 0;
+  color: black;
+}
+
+.high-z-index {
+  z-index: 1;
+}
+
+.city-table {
+  z-index: 1;
+}
+
