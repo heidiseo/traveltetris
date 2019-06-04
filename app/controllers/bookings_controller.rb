@@ -41,7 +41,16 @@ class BookingsController < ApplicationController
     end
   end
 
-  def destroy
+  def show
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    # redirect_to confirmation_bookings_path(@booking)
+  end
+
+  def confirmation
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    # redirect_to root_path
   end
 
   private
