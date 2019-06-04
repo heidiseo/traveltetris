@@ -5,6 +5,7 @@
 
 
       <% @booking.flights.each_slice(2) do |a, b|  %>
+        <% @counter = 0 %>
 
         <div class="boarding-card">
           <div class="details">
@@ -25,6 +26,7 @@
             </div>
             <div class="total-cost">
                 <p class="m-0 p-1">Roundtrip: <%= a.price_cents  %>£</p>
+                <% @counter =+ a.price_cents %>
             </div>
         </div>
       <% end %>
@@ -42,7 +44,7 @@
       <%= form_tag booking_payments_path(@booking) do %>
         <article>
           <label class="amount">
-            <span>Amount: <%= humanized_money_with_symbol(counter) %></span>
+            <span>Amount: <%= humanized_money_with_symbol(@counter) %></span>
           </label>
         </article>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
