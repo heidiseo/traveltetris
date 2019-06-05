@@ -1691,6 +1691,7 @@ pre code {
   padding: 0.75rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
+  cursor: pointer;
 }
 
 /* line 18, node_modules/bootstrap/scss/_tables.scss */

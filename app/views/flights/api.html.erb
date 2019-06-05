@@ -182,6 +182,20 @@
     });
   });
 
+  const totalBtns = document.querySelectorAll(".price-2-small-boxes");
+  totalBtns.forEach((totalBtn) => {
+    totalBtn.addEventListener("click", (event) => {
+      let rowFlights = document.querySelectorAll("tr .ticket")
+      // baseElement.querySelector("tr")
+      rowFlights.forEach((rowFlight) => {
+        if (rowFlight.classList.contains('selected')) {
+          rowFlight.classList.remove("selected");
+        } else {
+          rowFlight.classList.add("selected");
+        }
+      })
+    });
+  });
 
   const addFlights = () => {
     const selectedFlights = document.querySelectorAll(".selected");
