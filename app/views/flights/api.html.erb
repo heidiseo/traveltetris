@@ -6,28 +6,26 @@
   </div>
 
   <div class="flight-info">
-    <div class="d-flex justify-content-center my-3">
+    <div class="d-flex align-dates my-3">
       <% @going_flights.each do |date, flights| %>
         <% dep_time_format = Date.parse(date) %>
         <% arr_time_format = flights.first.arrival_date %>
 
-        <div class="date-card grey d-flex justify-content-between">
+        <div class=" d-flex">
           <div class="card-body-date">
-            <span class="card-text"><strong><%= dep_time_format.strftime("%d")%> <%= dep_time_format.strftime("%B")%>  -  <%=  arr_time_format.strftime("%d")%> <%= arr_time_format.strftime("%B")%> <%= arr_time_format.strftime("%Y")%> </strong> </span>
+            <span class="card-text text-center"><strong><%= dep_time_format.strftime("%d")%> <%= dep_time_format.strftime("%B")%>  -  <%=  arr_time_format.strftime("%d")%> <%= arr_time_format.strftime("%B")%> <%= arr_time_format.strftime("%Y")%> </strong> </span>
           </div>
         </div>
       <% end %>
-        <div class="card-card grey d-flex justify-content-between">
-          <div class="card-body-date">
-            <p class= "card-text"><strong>Total</strong></p>
-          </div>
-        </div>
     </div>
 
 
     <div class="d-flex justify-content-center my-3 anchor">
       <div class="flight-highlighter">
-        <p class="best-deal"><strong>Best Deal</strong></p>
+        <div class="ribbon ribbon-top-right">
+          <span>Best Deal</span>
+        </div>
+        <!-- <p>Best deal</p> -->
       </div>
 
         <div>
@@ -40,10 +38,46 @@
                   <tbody>
                     <tr>
                       <td>
-                        <button type= "button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalLong<%= flight_pair[0].id %>" data-flightid="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>" >
-                          <div class="card-body my-3">
-                            <span class="card-text-city m-0 p-0"><%= flight_pair[0].arrival_city.name%></span>
-                            <span class="card-text-city m-0 p-0">£ <%= flight_pair[0].price_cents %></span>
+                          <div class="card-body my-3 ticket" data-id="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>">
+                            <div class="details">
+                              <div class="d-flex justify-content-center width-100">
+                                <div class="departing flight-details m-1 justify-content-between">
+                                  <p class="small-font mt-2"><%= DateTime.strptime(flight_pair[0].full_departure_date.to_s,'%s').strftime("%H:%M") %></p>
+                                  <p><strong><%= flight_pair[0].departure_city.airport_code %></strong></p>
+                                  <p class="small-font"><%= flight_pair[0].departure_city.name %></p>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                  <i class="fas fa-plane plane-icon"></i>
+                                </div>
+                                <div class="returning flight-details m-1">
+                                  <p class="small-font mt-2"><%= DateTime.strptime(flight_pair[0].full_arrival_date.to_s,'%s').strftime("%H:%M") %></p>
+                                  <p><strong><%= flight_pair[0].arrival_city.airport_code %></strong></p>
+                                  <p class="small-font"><%= flight_pair[0].arrival_city.name %></p>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <div class="d-flex justify-content-center card-border-top">
+                                <div class="departing flight-details m-1">
+                                  <p class="small-font mt-2"><%= DateTime.strptime(flight_pair[1].full_departure_date.to_s,'%s').strftime("%H:%M") %></p>
+                                  <p><strong><%= flight_pair[1].departure_city.airport_code %></strong></p>
+                                  <p class="small-font"><%= flight_pair[1].departure_city.name %></p>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                  <i class="fas fa-plane reverse-plane plane-icon"></i>
+                                </div>
+                                <div class="returning flight-details m-1">
+                                  <p class="small-font mt-2"><%= DateTime.strptime(flight_pair[1].full_arrival_date.to_s,'%s').strftime("%H:%M") %></p>
+                                  <p><strong><%= flight_pair[1].arrival_city.airport_code %></strong></p>
+                                  <p class="small-font"><%= flight_pair[1].arrival_city.name %></p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="d-flex justify-content-center bottom-price">
+                              <div>
+                                <h5><strong><%= humanized_money_with_symbol(flight_pair[1].price_cents) %></strong></h5>
+                              </div>
+                            </div>
                           </div>
                         </button>
                       </td>
@@ -53,115 +87,74 @@
 
         <!--    Modal  PopUp-->
 
-                <div class="modal fade" id="exampleModalLong<%= flight_pair[0].id %>" data-id="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Flight Info</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <% [0, 1].each do |num| %>
-                          <p>
-                            <%= num == 0 ? "Departing flight -" : "Arriving flight -"  %>
-                            <%= flight_pair[num].departure_date.strftime("%A, %d %B %Y") %>
-                          </p>
-                          <p>
-                            <i class="far fa-circle" style="font-size: 1em"></i>
-                            <%= DateTime.strptime(flight_pair[num].full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].departure_city.name %>
-                          </p>
-                          <div class="d-flex">
-                            <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
-                            <p class="px-3">Travel time: <%= flight_pair[num].duration %></p>
-                          </div>
-                          <p>
-                            <i class="far fa-circle" style="font-size: 1em"></i>
-                            <%= DateTime.strptime(flight_pair[num].full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].arrival_city.name %>
-                          </p>
-                        <% end %>
-                        <p class="pl-3">  Price: <%= humanized_money_with_symbol(flight_pair[1].price_cents) %></p>
-                      </div>
 
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary select">Select flight</button>
+                  <div class="modal fade" id="exampleModalLong<%= flight_pair[0].id %>" data-id="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Flight Info</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <% [0, 1].each do |num| %>
+                            <p>
+                              <%= num == 0 ? "Departing flight -" : "Arriving flight -"  %>
+                              <%= flight_pair[num].departure_date.strftime("%A, %d %B %Y") %>
+                            </p>
+                            <p>
+                              <i class="far fa-circle" style="font-size: 1em"></i>
+                              <%= DateTime.strptime(flight_pair[num].full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].departure_city.name %>
+                            </p>
+                            <div class="d-flex">
+                              <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
+                              <p class="px-3">Travel time: <%= flight_pair[num].duration %></p>
+                            </div>
+                            <p>
+                              <i class="far fa-circle" style="font-size: 1em"></i>
+                              <%= DateTime.strptime(flight_pair[num].full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].arrival_city.name %>
+                            </p>
+                          <% end %>
+                          <p class="pl-3">  Price: <%= humanized_money_with_symbol(flight_pair[1].price_cents) %></p>
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary select">Select flight</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
 
        <!--    end of modal popup -->
 
+                </div>
               <% end %>
             </div>
         <% end %>
       </div>
 
       <div class="flight-card d-flex justify-content-between">
-          <% @combs_with_price.each_with_index do |flights, index| %>
-            <table class="table table-hover high-z-index">
-              <tbody>
-                <tr>
-                  <td>
-                    <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal<%=index%>">
-                      <div class="card-body-total my-3">
-                        <strong><p class="card-text">£ <%= flights[:price]%></p></strong>
-                      </div>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          <% end %>
-
-         <!-- *******************price modal********************** -->
-          <% @combs_with_price.each_with_index do |flights, index| %>
-            <!-- flights[:flights] an array of arrays -->
-            <div class="modal fade" id="exampleModal<%=index%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Flights in this combination</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-
-                    <!-- flights[:flights] an array of arrays -->
-                    <% flights[:flights].each do |flight_pair| %>
-                      <% [0, 1].each do |num| %>
-                        <p>
-                          <%= num == 0 ? "Departing flight -" : "Arriving flight -"  %>
-                          <%= flight_pair[num].departure_date.strftime("%A, %d %B %Y") %>
-                        </p>
-                        <p>
-                          <i class="far fa-circle" style="font-size: 1em"></i>
-                          <%= DateTime.strptime(flight_pair[num].full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].departure_city.name %>
-                        </p>
-                        <div class="d-flex">
-                          <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
-                          <p class="px-3">Travel time: <%= flight_pair[num].duration %></p>
+        <% counter = 0 %>
+        <% @combs_with_price.each do |flights| %>
+        <% counter += 1 %>
+          <table class="table high-z-index">
+            <tbody>
+              <tr>
+                <td class="<%= counter == 1 ? "no-border" : "" %>">
+                  <div class="total-big-card my-3 d-flex align-items-end">
+                    <div class="price-2-small-boxes">
+                        <div class= "total-text"><span class="m-0"><strong>Total</strong></span></div>
+                        <div class="card-text-holder">
+                          <span class="card-text"><strong><%= humanized_money_with_symbol(flights[:price]) %></strong></span>
                         </div>
-                        <p>
-                          <i class="far fa-circle" style="font-size: 1em"></i>
-                          <%= DateTime.strptime(flight_pair[num].full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].arrival_city.name %>
-                        </p>
-                      <% end %>
-                    <% end %>
-
+                    </div>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-     <!--  **********************end price modal*********************** -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        <% end %>
       </div>
     </div>
    </div>
@@ -174,41 +167,50 @@
 </div>
 
 
-  <script>
+<script>
 
-    var selectButtons = document.querySelectorAll(".btn.select");
-    selectButtons.forEach((selectButton) => {
-      selectButton.addEventListener("click", (event) => {
-        console.log(event.currentTarget);
-        var flightId = event.currentTarget.parentNode.parentNode.parentNode.parentNode.dataset.id;
-        var flight = document.querySelector(`button[data-flightid='${flightId}']`);
-        if (flight.classList.contains('selected')) {
-          flight.classList.remove("selected");
-          event.currentTarget.innerHTML = "Select flight";
+  var tickets = document.querySelectorAll(".ticket");
+  tickets.forEach((ticket) => {
+    ticket.addEventListener("click", (event) => {
+      var flightId = event.currentTarget.dataset.id;
+      var flight = document.querySelector(`div[data-id='${flightId}']`);
+      if (flight.classList.contains('selected')) {
+        flight.classList.remove("selected");
+      } else {
+        flight.classList.add("selected");
+      }
+    });
+  });
+
+  const totalBtns = document.querySelectorAll(".price-2-small-boxes");
+  totalBtns.forEach((totalBtn) => {
+    totalBtn.addEventListener("click", (event) => {
+      let rowFlights = document.querySelectorAll("tr .ticket")
+      // baseElement.querySelector("tr")
+      rowFlights.forEach((rowFlight) => {
+        if (rowFlight.classList.contains('selected')) {
+          rowFlight.classList.remove("selected");
         } else {
-          flight.classList.add("selected");
-          event.currentTarget.innerHTML = "Unselect flight";
+          rowFlight.classList.add("selected");
         }
-        var closeBtn = event.currentTarget.parentNode.parentNode.firstElementChild.lastElementChild;
-        closeBtn.click();
-      });
+      })
+    });
+  });
+
+  const addFlights = () => {
+    const selectedFlights = document.querySelectorAll(".selected");
+    let extraHref = "&flight=";
+    const lastFlight = selectedFlights[selectedFlights.length-1]
+    selectedFlights.forEach((flight) => {
+      if(flight == lastFlight) {
+        extraHref += `${flight.dataset.id}`;
+      } else {
+        extraHref += `${flight.dataset.id},`;
+      }
     });
 
-
-    const addFlights = () => {
-      const selectedFlights = document.querySelectorAll(".selected");
-      let extraHref = "&flight=";
-      const lastFlight = selectedFlights[selectedFlights.length-1]
-      selectedFlights.forEach((flight) => {
-        if(flight == lastFlight) {
-          extraHref += `${flight.dataset.flightid}`;
-        } else {
-          extraHref += `${flight.dataset.flightid},`;
-        }
-      });
-
-      const bookBtn = document.getElementById("book-btn");
-      const newHref = bookBtn.href + extraHref;
-      bookBtn.href = newHref;
-    }
-  </script>
+    const bookBtn = document.getElementById("book-btn");
+    const newHref = bookBtn.href + extraHref;
+    bookBtn.href = newHref;
+  }
+</script>
