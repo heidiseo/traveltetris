@@ -8,6 +8,9 @@ const initSelect2 = () => {
   $('.departure').select2({
     placeholder: "Departure city"
 });
+  $('.nationality').select2({
+    placeholder: "Nationality"
+});
 };
 
 export { initSelect2 };
