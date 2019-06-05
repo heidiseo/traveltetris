@@ -11,14 +11,21 @@
       <% else %>
         <h2 class="text-center">Choose your available dates</h2>
         <%= simple_form_for :trip_dates, url: plan_path(@plan), method: :patch do |f| %>
+          <% counter = 1 %>
           <% @plan.cities.size.times do |count| %>
             <div class="container">
-              <div class="row">
-                <div class="col">
-                  <%= f.input 'start_dates', as: :string, input_html: {class: "datepicker-#{count}", id: "start-date-#{count}", name: 'trip_dates[start_dates][]'} %>
+              <div class="date-space">
+                <div>
+                  <p class="text-center date-counter"><strong>Date <%= counter %></strong></p>
+                  <% counter += 1 %>
                 </div>
-                <div class="col">
-                 <%= f.input 'end_dates', as: :string, input_html: {class: "datepicker-#{count} end-date-#{count}", id: "end-date-#{count}", name: 'trip_dates[end_dates][]'} %>
+                <div class="row">
+                  <div class="col">
+                    <%= f.input 'start_dates', as: :string, input_html: {class: "datepicker-#{count}", id: "start-date-#{count}", name: 'trip_dates[start_dates][]'} %>
+                  </div>
+                  <div class="col">
+                   <%= f.input 'end_dates', as: :string, input_html: {class: "datepicker-#{count} end-date-#{count}", id: "end-date-#{count}", name: 'trip_dates[end_dates][]'} %>
+                  </div>
                 </div>
               </div>
             </div>
