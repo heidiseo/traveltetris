@@ -1,9 +1,29 @@
 $tiffany: #6DDBCA;
 $grey: #9D9D9D;
 
+.small-font {
+  font-size: 12px;
+}
+
+.plane-icon {
+  color: $tiffany;
+}
+
+.card-border-top {
+  border-top: 1px solid rgba(157, 157, 157, 0.3) ;
+}
 
 .booking-title {
   margin: 30px auto;
+}
+
+.bottom-price {
+  border-top: 1px dashed rgba(139, 224, 218, 1);
+  padding: 9px;
+}
+
+.reverse-plane {
+  transform: scaleX(-1);
 }
 
 .selected {
@@ -105,17 +125,16 @@ a:hover {
 
 .anchor {
   position: relative;
-  background-color: #D4F3EF;
+  // background-color: #D4F3EF;
   // z-index: 0;
 }
 
 .flight-highlighter {
   width: 120%;
-  height: 75px;
+  height: 357px;
   position: absolute;
-  top: 17px;
   left: -70px;
-  background: #6DDBCA;
+  background: #d4f3ef;
   // z-index: 1;
   display: flex;
   justify-content: flex-end;

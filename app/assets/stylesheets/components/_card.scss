@@ -19,8 +19,8 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  // width: 250px;
-  // height: 75px;
+  width: 250px;
+  height: 75px;
 }
 
 .flight-card-destinations {
@@ -33,14 +33,15 @@
 
 .card-body {
   width: 200px;
-  height: 50px;
+  height: 300px;
   margin: auto;
-  display: flex;
   padding: 5px !important;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
   border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
 }
 
 .card-body-total {
