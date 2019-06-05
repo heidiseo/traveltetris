@@ -53,62 +53,59 @@
 
         <!--    Modal  PopUp-->
 
+                <div class="modal fade" id="exampleModalLong<%= flight_pair[0].id %>" data-id="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Flight Info</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <% [0, 1].each do |num| %>
+                          <p>
+                            <%= num == 0 ? "Departing flight -" : "Arriving flight -"  %>
+                            <%= flight_pair[num].departure_date.strftime("%A, %d %B %Y") %>
+                          </p>
+                          <p>
+                            <i class="far fa-circle" style="font-size: 1em"></i>
+                            <%= DateTime.strptime(flight_pair[num].full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].departure_city.name %>
+                          </p>
+                          <div class="d-flex">
+                            <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
+                            <p class="px-3">Travel time: <%= flight_pair[num].duration %></p>
+                          </div>
+                          <p>
+                            <i class="far fa-circle" style="font-size: 1em"></i>
+                            <%= DateTime.strptime(flight_pair[num].full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].arrival_city.name %>
+                          </p>
+                        <% end %>
+                        <p class="pl-3">  Price: <%= humanized_money_with_symbol(flight_pair[1].price_cents) %></p>
+                      </div>
 
-                  <div class="modal fade" id="exampleModalLong<%= flight_pair[0].id %>" data-id="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLongTitle">Flight Info</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <% [0, 1].each do |num| %>
-                            <p>
-                              <%= num == 0 ? "Departing flight -" : "Arriving flight -"  %>
-                              <%= flight_pair[num].departure_date.strftime("%A, %d %B %Y") %>
-                            </p>
-                            <p>
-                              <i class="far fa-circle" style="font-size: 1em"></i>
-                              <%= DateTime.strptime(flight_pair[num].full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].departure_city.name %>
-                            </p>
-                            <div class="d-flex">
-                              <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
-                              <p class="px-3">Travel time: <%= flight_pair[num].duration %></p>
-                            </div>
-                            <p>
-                              <i class="far fa-circle" style="font-size: 1em"></i>
-                              <%= DateTime.strptime(flight_pair[num].full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].arrival_city.name %>
-                            </p>
-                          <% end %>
-                          <p class="pl-3">  Price: <%= humanized_money_with_symbol(flight_pair[1].price_cents) %></p>
-                        </div>
-
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary select">Select flight</button>
-                        </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary select">Select flight</button>
                       </div>
                     </div>
+                  </div>
+                </div>
 
        <!--    end of modal popup -->
 
-                </div>
               <% end %>
             </div>
         <% end %>
       </div>
 
-      <div class="flight-card d-flex justify-content-between"">
-          <% @combs_with_price.each do |flights| %>
-            <% flights[:flights].each do |flight_pair| %>
-            <% end %>
+      <div class="flight-card d-flex justify-content-between">
+          <% @combs_with_price.each_with_index do |flights, index| %>
             <table class="table table-hover high-z-index">
               <tbody>
                 <tr>
                   <td>
-                    <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
+                    <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal<%=index%>">
                       <div class="card-body-total my-3">
                         <strong><p class="card-text">£ <%= flights[:price]%></p></strong>
                       </div>
@@ -120,26 +117,50 @@
           <% end %>
 
          <!-- *******************price modal********************** -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+          <% @combs_with_price.each_with_index do |flights, index| %>
+            <!-- flights[:flights] an array of arrays -->
+            <div class="modal fade" id="exampleModal<%=index%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Flights in this combination</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+
+                    <!-- flights[:flights] an array of arrays -->
+                    <% flights[:flights].each do |flight_pair| %>
+                      <% [0, 1].each do |num| %>
+                        <p>
+                          <%= num == 0 ? "Departing flight -" : "Arriving flight -"  %>
+                          <%= flight_pair[num].departure_date.strftime("%A, %d %B %Y") %>
+                        </p>
+                        <p>
+                          <i class="far fa-circle" style="font-size: 1em"></i>
+                          <%= DateTime.strptime(flight_pair[num].full_departure_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].departure_city.name %>
+                        </p>
+                        <div class="d-flex">
+                          <i class="fas fa-ellipsis-v" style="font-size: 2em"></i>
+                          <p class="px-3">Travel time: <%= flight_pair[num].duration %></p>
+                        </div>
+                        <p>
+                          <i class="far fa-circle" style="font-size: 1em"></i>
+                          <%= DateTime.strptime(flight_pair[num].full_arrival_date.to_s,'%s').strftime("%H:%M") %> - <%= flight_pair[num].arrival_city.name %>
+                        </p>
+                      <% end %>
+                    <% end %>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
+          <% end %>
      <!--  **********************end price modal*********************** -->
       </div>
     </div>
