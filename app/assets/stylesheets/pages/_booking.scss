@@ -111,6 +111,7 @@ a:hover {
   text-align: center;
 }
 .flight-details {
+  width: 40%;
   align-items: center;
   text-align: center;
 }
@@ -130,7 +131,7 @@ a:hover {
 }
 
 .flight-highlighter {
-  width: 120%;
+  width: 111%;
   height: 357px;
   position: absolute;
   left: -70px;
@@ -156,3 +157,17 @@ a:hover {
   z-index: 1;
 }
 
+.align-dates {
+  width: 100%;
+  padding-left: 17.5%;
+}
+
+.width-100 {
+  width: 100%
+}
+
+.price-2-small-boxes:hover {
+  // transition: .2s;
+  transform: scale(1.25);
+  cursor: pointer;
+}

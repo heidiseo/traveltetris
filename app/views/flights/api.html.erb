@@ -6,7 +6,7 @@
   </div>
 
   <div class="flight-info">
-    <div class="d-flex justify-content-center my-3">
+    <div class="d-flex align-dates my-3">
       <% @going_flights.each do |date, flights| %>
         <% dep_time_format = Date.parse(date) %>
         <% arr_time_format = flights.first.arrival_date %>
@@ -22,7 +22,10 @@
 
     <div class="d-flex justify-content-center my-3 anchor">
       <div class="flight-highlighter">
-        <p class="best-deal"><strong>Best Deal</strong></p>
+        <div class="ribbon ribbon-top-right">
+          <span>Best Deal</span>
+        </div>
+        <!-- <p>Best deal</p> -->
       </div>
 
         <div>
@@ -37,9 +40,9 @@
                       <td>
                           <div class="card-body my-3">
                             <div class="details">
-                              <div class="d-flex justify-content-center">
+                              <div class="d-flex justify-content-center width-100">
                                 <div class="departing flight-details m-1 justify-content-between">
-                                  <p class="small-font mt-2""><%= DateTime.strptime(flight_pair[0].full_departure_date.to_s,'%s').strftime("%H:%M") %></p>
+                                  <p class="small-font mt-2"><%= DateTime.strptime(flight_pair[0].full_departure_date.to_s,'%s').strftime("%H:%M") %></p>
                                   <p><strong><%= flight_pair[0].departure_city.airport_code %></strong></p>
                                   <p class="small-font"><%= flight_pair[0].departure_city.name %></p>
                                 </div>
@@ -131,47 +134,27 @@
         <% end %>
       </div>
 
-      <div class="flight-card d-flex justify-content-between"">
-          <% @combs_with_price.each do |flights| %>
-            <% flights[:flights].each do |flight_pair| %>
-            <% end %>
-            <table class="table table-hover high-z-index">
-              <tbody>
-                <tr>
-                  <td>
-                    <button class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
-                      <div class="card-body-total my-3">
-                        <strong><p class="card-text">£ <%= flights[:price]%></p></strong>
-                      </div>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          <% end %>
-
-         <!-- *******************price modal********************** -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-     <!--  **********************end price modal*********************** -->
+      <div class="flight-card d-flex justify-content-between">
+        <% counter = 0 %>
+        <% @combs_with_price.each do |flights| %>
+        <% counter += 1 %>
+          <table class="table high-z-index">
+            <tbody>
+              <tr>
+                <td class="<%= counter == 1 ? "no-border" : "" %>">
+                  <div class="total-big-card my-3 d-flex align-items-end">
+                    <div class="price-2-small-boxes">
+                        <div class= "total-text"><span class="m-0"><strong>Total</strong></span></div>
+                        <div class="card-text-holder">
+                          <span class="card-text"><strong><%= humanized_money_with_symbol(flights[:price]) %></strong></span>
+                        </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        <% end %>
       </div>
     </div>
    </div>
@@ -184,41 +167,41 @@
 </div>
 
 
-  <script>
+<script>
 
-    var selectButtons = document.querySelectorAll(".btn.select");
-    selectButtons.forEach((selectButton) => {
-      selectButton.addEventListener("click", (event) => {
-        console.log(event.currentTarget);
-        var flightId = event.currentTarget.parentNode.parentNode.parentNode.parentNode.dataset.id;
-        var flight = document.querySelector(`button[data-flightid='${flightId}']`);
-        if (flight.classList.contains('selected')) {
-          flight.classList.remove("selected");
-          event.currentTarget.innerHTML = "Select flight";
-        } else {
-          flight.classList.add("selected");
-          event.currentTarget.innerHTML = "Unselect flight";
-        }
-        var closeBtn = event.currentTarget.parentNode.parentNode.firstElementChild.lastElementChild;
-        closeBtn.click();
-      });
+  var selectButtons = document.querySelectorAll(".btn.select");
+  selectButtons.forEach((selectButton) => {
+    selectButton.addEventListener("click", (event) => {
+      console.log(event.currentTarget);
+      var flightId = event.currentTarget.parentNode.parentNode.parentNode.parentNode.dataset.id;
+      var flight = document.querySelector(`button[data-flightid='${flightId}']`);
+      if (flight.classList.contains('selected')) {
+        flight.classList.remove("selected");
+        event.currentTarget.innerHTML = "Select flight";
+      } else {
+        flight.classList.add("selected");
+        event.currentTarget.innerHTML = "Unselect flight";
+      }
+      var closeBtn = event.currentTarget.parentNode.parentNode.firstElementChild.lastElementChild;
+      closeBtn.click();
+    });
+  });
+
+
+  const addFlights = () => {
+    const selectedFlights = document.querySelectorAll(".selected");
+    let extraHref = "&flight=";
+    const lastFlight = selectedFlights[selectedFlights.length-1]
+    selectedFlights.forEach((flight) => {
+      if(flight == lastFlight) {
+        extraHref += `${flight.dataset.flightid}`;
+      } else {
+        extraHref += `${flight.dataset.flightid},`;
+      }
     });
 
-
-    const addFlights = () => {
-      const selectedFlights = document.querySelectorAll(".selected");
-      let extraHref = "&flight=";
-      const lastFlight = selectedFlights[selectedFlights.length-1]
-      selectedFlights.forEach((flight) => {
-        if(flight == lastFlight) {
-          extraHref += `${flight.dataset.flightid}`;
-        } else {
-          extraHref += `${flight.dataset.flightid},`;
-        }
-      });
-
-      const bookBtn = document.getElementById("book-btn");
-      const newHref = bookBtn.href + extraHref;
-      bookBtn.href = newHref;
-    }
-  </script>
+    const bookBtn = document.getElementById("book-btn");
+    const newHref = bookBtn.href + extraHref;
+    bookBtn.href = newHref;
+  }
+</script>
