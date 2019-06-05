@@ -1,18 +1,23 @@
 <!-- <h2>Sign in to earn points</h2> -->
 <%#= render "devise/registrations/edit.html.erb" %>
-<div class="container">
-<h2 class="text-center my-3">Traveller Details</h2>
-<p class="text-center">Traveller details must match government-issued photo ID exactly.</p>
+<div class="container traveller-container">
+<h2 class="text-center mt-5 mb-2">Traveller Details</h2>
+<p class="text-center mb-5">Traveller details must match government-issued photo ID exactly.</p>
 
 <%= simple_form_for @booking do |f| %>
-  <%= f.input :first_name_passenger %>
-  <%= f.input :last_name_passenger %>
+  <div class="passenger-name">
+    <%= f.input :first_name_passenger, label: "First Name", :input_html => { class: "input-field" } %>
+    <%= f.input :last_name_passenger, label: "Last Name", :input_html => { class: "input-field" } %>
+  </div>
+  <div class="passenger-name">
+    <%= f.input :passport, label: "Passport Number", :input_html => { class: "input-field" } %>
+    <%= f.input :nationality, :input_html => { class: "input-field" } %>
+    <%= f.association :nationality, :input_html => { class: "input-field" }, as: :select, input_html: { class:'select2 departure' } %>
+  </div>
   <%= f.input :email %>
-  <%= f.input :passport %>
-  <%= f.input :nationality %>
-  <%= f.input :dob, label: "Date of birth" %>
-  <div class="booking-btn my-3">
-    <%= f.button :submit, "Proceed with booking", class:"btn-treehouse btn-home m-14" %>
+  <%= f.input :dob, label: "Date of Birth" %>
+  <div class="booking-btn my-3 submit-button">
+    <%= f.button :submit, "Proceed with booking", class:"btn-treehouse btn-home" %>
   </div>
 <% end %>
 

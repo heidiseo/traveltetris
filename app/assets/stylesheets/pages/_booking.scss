@@ -53,6 +53,11 @@ $grey: #9D9D9D;
   grid-column-gap: 20px;
 }
 
+.price-breakdown-title {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
 .booking-link {
   background-color: $tiffany;
   margin: 0px;

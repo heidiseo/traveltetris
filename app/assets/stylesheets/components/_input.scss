@@ -1,0 +1,20 @@
+.input-field {
+  width: 272px;
+  font-weight: bold;
+}
+
+.passenger-name {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 5px;
+  justify-content: space-between;
+  align-content: space-around;
+}
+
+.traveller-container {
+  width: 600px;
+}
+
+.submit-button {
+  padding-top: 30px;
+}
