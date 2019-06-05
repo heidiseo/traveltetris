@@ -27,14 +27,15 @@
       </div>
 
       <div>
-        <% @combs_with_price.each do |flights| %>
+        <% @combs_with_price.each_with_index do |flights, index| %>
           <div class="flight-card-destinations">
             <% flights[:flights].each do |flight_pair| %>
+
               <table class="table table-hover city-table">
                 <tbody>
                   <tr>
                     <td>
-                      <div class="card-body my-3 ticket" data-id="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>">
+                      <div class="card-body my-3 ticket" data-row="row<%=index%>" data-id="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>">
                         <div class="details">
                           <div class="d-flex justify-content-center width-100">
                             <div class="departing flight-details m-1 justify-content-between">
@@ -88,14 +89,14 @@
 
       <div class="flight-card d-flex justify-content-between">
         <% counter = 0 %>
-        <% @combs_with_price.each do |flights| %>
+        <% @combs_with_price.each_with_index do |flights, index| %>
           <% counter += 1 %>
           <table class="table high-z-index">
             <tbody>
               <tr>
                 <td class="<%= counter == 1 ? "no-border" : "" %>">
                   <div class="total-big-card my-3 d-flex align-items-end">
-                    <div class="price-2-small-boxes">
+                    <div class="price-2-small-boxes" data-row="row<%=index%>">
                       <div class= "total-text">
                         <span class="m-0"><strong>Total</strong></span>
                       </div>
@@ -137,7 +138,11 @@
   const totalBtns = document.querySelectorAll(".price-2-small-boxes");
   totalBtns.forEach((totalBtn) => {
     totalBtn.addEventListener("click", (event) => {
-      let rowFlights = document.querySelectorAll("tr .ticket")
+      const rowIndex = event.currentTarget.dataset.row;
+
+      // let rowFlights = document.querySelectorAll("tr .ticket")
+      let rowFlights = document.querySelectorAll(`div[data-row='${rowIndex}']`)
+
       // baseElement.querySelector("tr")
       rowFlights.forEach((rowFlight) => {
         if (rowFlight.classList.contains('selected')) {
