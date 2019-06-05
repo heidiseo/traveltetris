@@ -13,7 +13,7 @@
 
         <div class=" d-flex">
           <div class="card-body-date">
-            <span class="card-text"><strong><%= dep_time_format.strftime("%d")%> <%= dep_time_format.strftime("%B")%>  -  <%=  arr_time_format.strftime("%d")%> <%= arr_time_format.strftime("%B")%> <%= arr_time_format.strftime("%Y")%> </strong> </span>
+            <span class="card-text text-center"><strong><%= dep_time_format.strftime("%d")%> <%= dep_time_format.strftime("%B")%>  -  <%=  arr_time_format.strftime("%d")%> <%= arr_time_format.strftime("%B")%> <%= arr_time_format.strftime("%Y")%> </strong> </span>
           </div>
         </div>
       <% end %>
@@ -38,7 +38,7 @@
                   <tbody>
                     <tr>
                       <td>
-                          <div class="card-body my-3">
+                          <div class="card-body my-3 ticket" data-id="<%= flight_pair[0].id %>|<%= flight_pair[1].id %>">
                             <div class="details">
                               <div class="d-flex justify-content-center width-100">
                                 <div class="departing flight-details m-1 justify-content-between">
@@ -169,21 +169,16 @@
 
 <script>
 
-  var selectButtons = document.querySelectorAll(".btn.select");
-  selectButtons.forEach((selectButton) => {
-    selectButton.addEventListener("click", (event) => {
-      console.log(event.currentTarget);
-      var flightId = event.currentTarget.parentNode.parentNode.parentNode.parentNode.dataset.id;
-      var flight = document.querySelector(`button[data-flightid='${flightId}']`);
+  var tickets = document.querySelectorAll(".ticket");
+  tickets.forEach((ticket) => {
+    ticket.addEventListener("click", (event) => {
+      var flightId = event.currentTarget.dataset.id;
+      var flight = document.querySelector(`div[data-id='${flightId}']`);
       if (flight.classList.contains('selected')) {
         flight.classList.remove("selected");
-        event.currentTarget.innerHTML = "Select flight";
       } else {
         flight.classList.add("selected");
-        event.currentTarget.innerHTML = "Unselect flight";
       }
-      var closeBtn = event.currentTarget.parentNode.parentNode.firstElementChild.lastElementChild;
-      closeBtn.click();
     });
   });
 
