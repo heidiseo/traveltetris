@@ -30,10 +30,34 @@
               </div>
             </div>
           <% end %>
-        <div class="my-3 submit-btn-center"><%= f.button :submit, "Submit", class:"btn-treehouse" %></div>
+        <div id="btn-loading" class="my-3 submit-btn-center"><%= f.button :submit, "Submit", class:"btn-treehouse" %></div>
       <% end %>
     <% end %>
    <% end %>
   </div>
 </div>
+<div class="hidden">
+  <div class="airplane-container">
+    <div id="loading" class="">
+      <%= image_tag "airplane.png", alt: "Aereo", width: 400%> Finding your flights...
+    </div>
+  </div>
+</div>
+
+<script>
+  const loadingPage = document.querySelector("#btn-loading input");
+  // console.log(loadingPage);
+  loadingPage.addEventListener("click", (event) => {
+  document.querySelector(".hidden").classList.remove("hidden")
+  document.querySelector("#loading").classList.add("loading")
+  document.querySelector(".white-box").classList.add("hidden")
+
+  });
+
+  // const loadingPlane = (event) => {
+
+  // };
+</script>
+
+
 
