@@ -18628,7 +18628,7 @@ readers do not read off random characters that represent icons */
 
 /* line 20, app/assets/stylesheets/components/_card.scss */
 .flight-card {
-  background-color: #D4F3EF;
+  /*background-color: #D4F3EF;*/
   flex-direction: column;
   justify-content: space-around;
   align-items: center;

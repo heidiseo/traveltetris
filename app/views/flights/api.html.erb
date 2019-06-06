@@ -6,7 +6,7 @@
   </div>
 
   <div class="flight-info">
-    <div class="d-flex align-dates my-3">
+    <div class="d-flex align-dates my-3" id="set-width">
       <% @going_flights.each do |date, flights| %>
         <% dep_time_format = Date.parse(date) %>
         <% arr_time_format = flights.first.arrival_date %>
@@ -19,7 +19,7 @@
     </div>
 
 
-    <div class="d-flex justify-content-center my-3 anchor">
+    <div class="d-flex justify-content-center my-3 anchor" id="get-width">
       <div class="flight-highlighter">
         <div class="ribbon ribbon-top-right">
           <span>Best Deal</span>
@@ -61,7 +61,7 @@
                               <p class="small-font"><%= flight_pair[1].departure_city.name %></p>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
-                              <i class="fas fa-plane reverse-plane plane-icon"></i>
+                              <i class="fas fa-plane plane-icon"></i>
                             </div>
                             <div class="returning flight-details m-1">
                               <p class="small-font mt-2"><%= DateTime.strptime(flight_pair[1].full_arrival_date.to_s,'%s').strftime("%H:%M") %></p>
@@ -174,4 +174,7 @@
     const newHref = bookBtn.href + extraHref;
     bookBtn.href = newHref;
   }
+
+  const correctWidth = document.getElementById('get-width').offsetWidth
+  document.getElementById('set-width').style.width = `${correctWidth}px`
 </script>
