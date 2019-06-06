@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="text-center breakdown-title my-3">Trip Details</h1>
-  <div class="flights">
+  <div class="flights passenger-holder">
     <div class="flights-2">
 
 
@@ -47,7 +47,7 @@
               <p><strong>Nationality:</strong> <%= @booking.nationality %></p>
               <p><strong>Date of Birth:</strong> <%= @booking.dob %></p>
               <br>
-              <span><strong>Amount:</strong> <%= humanized_money_with_symbol(@counter) %></span>
+              <span><strong>Amount: <%= humanized_money_with_symbol(@counter) %></strong></span>
             </label>
           </article>
           <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"

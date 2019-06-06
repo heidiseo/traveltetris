@@ -155,6 +155,10 @@
   });
 
   const addFlights = () => {
+    const totalBoxes = document.querySelectorAll('.price-2-small-boxes');
+    totalBoxes.forEach((box) => {
+      box.classList.remove('selected');
+    });
     const selectedFlights = document.querySelectorAll(".selected");
     let extraHref = "&flight=";
     const lastFlight = selectedFlights[selectedFlights.length-1]

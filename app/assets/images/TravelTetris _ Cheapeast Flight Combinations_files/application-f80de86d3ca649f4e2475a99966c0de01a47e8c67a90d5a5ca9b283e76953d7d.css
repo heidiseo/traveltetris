@@ -19059,6 +19059,11 @@ readers do not read off random characters that represent icons */
   opacity: .65;
 }
 
+.selected-total {
+  background-color: #9D9D9D;
+  opacity: .65;
+}
+
 /* line 35, app/assets/stylesheets/pages/_booking.scss */
 .price {
   border: 1px solid #6DDBCA;
