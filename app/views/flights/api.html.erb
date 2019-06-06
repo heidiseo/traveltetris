@@ -39,7 +39,7 @@
                           <div class="d-flex justify-content-center width-100">
                             <div class="departing flight-details m-1 justify-content-between">
                               <p class="small-font mt-2">
-                                <%= DateTime.parse(flight_pair[0].full_departure_date).strftime("%H:%M") %></p>
+                                <%= DateTime.parse(flight_pair[0].full_departure_date.to_s).strftime("%H:%M") %></p>
                               <p><strong><%= flight_pair[0].departure_city.airport_code %></strong></p>
                               <p class="small-font"><%= flight_pair[0].departure_city.name %></p>
                             </div>
