@@ -11,13 +11,13 @@
             <div class="departing flight-details">
               <h3><%= flight_pair[0].departure_city.name %><i class="fas fa-plane small-plane-icon"></i><%= flight_pair[0].arrival_city.name %></h3>
               <p>Duration: <%= flight_pair[0].duration %></p>
-              <p><%= DateTime.strptime(flight_pair[0].full_departure_date.to_s,'%s').strftime("%H:%M") %></p>
+              <p><%= DateTime.parse(flight_pair[0].full_departure_date).strftime("%H:%M") %></p>
               <p><%= flight_pair[0].departure_date.strftime("%A, %d %B %Y") %></p>
             </div>
             <div class="returning flight-details">
               <h3><%= flight_pair[1].departure_city.name %>   <i class="fas fa-plane small-plane-icon"></i>   <%= flight_pair[1].arrival_city.name %></h3>
               <p>Duration: <%= flight_pair[1].duration %></p>
-              <p><%= DateTime.strptime(flight_pair[1].full_departure_date.to_s,'%s').strftime("%H:%M") %></p>
+              <p><%= DateTime.parse(flight_pair[1].full_departure_date).strftime("%H:%M") %></p>
               <p><%= flight_pair[1].departure_date.strftime("%A, %d %B %Y") %></p>
             </div>
           </div>

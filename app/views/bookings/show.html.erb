@@ -13,14 +13,14 @@
               <div class="departing flight-details">
                   <h3><%= a.departure_city.name %> - <%= a.arrival_city.name %></h3>
                   <p><%= a.departure_date.strftime("%A, %d %B %Y") %></p>
-                  <p><%= DateTime.strptime(a.full_departure_date.to_s,'%s').strftime("%H:%M") %></p>
+                  <p><%= DateTime.parse(a.full_departure_date).strftime("%H:%M") %></p>
                   <p>Duration: <%= a.duration %></p>
                   <p>Flight <%= a.flight_number %></p>
               </div>
               <div class="returning flight-details">
                   <h3><%= b.departure_city.name %> - <%= b.arrival_city.name %></h3>
                   <p><%= b.departure_date.strftime("%A, %d %B %Y") %></p>
-                  <p><%= DateTime.strptime(b.full_departure_date.to_s,'%s').strftime("%H:%M") %></p>
+                  <p><%= DateTime.parse(b.full_departure_date).strftime("%H:%M") %></p>
                   <p>Duration: <%= b.duration %></p>
                   <p>Flight <%= b.flight_number %></p>
               </div>
