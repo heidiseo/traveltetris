@@ -17,8 +17,9 @@ class FlightsController < ApplicationController
         @plan.cities.each do |city|
           p city
           to = city
-          url = "https://api.skypicker.com/flights?flyFrom=#{@plan.city.airport_code}&to=#{to.airport_code}&date_from=#{departure}&date_to=#{departure}&return_from=#{arrival}&return_to=#{arrival}&max_stopovers=0&sort=price&asc=1&curr=GBP&partner=picky&limit=1"
+          # url = "https://api.skypicker.com/flights?flyFrom=#{@plan.city.airport_code}&to=#{to.airport_code}&date_from=#{departure}&date_to=#{departure}&return_from=#{arrival}&return_to=#{arrival}&max_stopovers=0&sort=price&asc=1&curr=GBP&partner=picky&limit=1"
           # url = "https://api.skypicker.com/flights?flyFrom=barcelona&to=london&dateFrom=20/10/2019&dateTo=12/12/2019&partner=picky"
+          url = "https://api.skypicker.com/flights?fly_from=city:#{@plan.city.airport_code}&fly_to=city:#{to.airport_code}&date_from=#{departure}&date_to=#{departure}&return_from=#{arrival}&return_to=#{arrival}&max_stopovers=0&sort=price&asc=1&curr=GBP&partner=picky&limit=1"
           response = open(url)
           p response
           response = JSON.parse(response.read)
@@ -26,6 +27,7 @@ class FlightsController < ApplicationController
           if data.any?
             flight_info = data.first['route']
             price = response['data'].first['price']
+
             duration = data.first['fly_duration']
             flight_info.each do |route|
               departure_city = City.find_by(name: route['cityFrom'].capitalize) || City.create(name: route['cityFrom'].capitalize)
