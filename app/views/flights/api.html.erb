@@ -30,7 +30,6 @@
         <% @combs_with_price.each_with_index do |flights, index| %>
           <div class="flight-card-destinations">
             <% flights[:flights].each do |flight_pair| %>
-
               <table class="table table-hover city-table">
                 <tbody>
                   <tr>
@@ -126,8 +125,7 @@
   var tickets = document.querySelectorAll(".ticket");
   tickets.forEach((ticket) => {
     ticket.addEventListener("click", (event) => {
-      var flightId = event.currentTarget.dataset.id;
-      var flight = document.querySelector(`div[data-id='${flightId}']`);
+      var flight = event.currentTarget;
       if (flight.classList.contains('selected')) {
         flight.classList.remove("selected");
       } else {
