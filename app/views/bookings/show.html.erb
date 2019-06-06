@@ -11,22 +11,20 @@
         <div class="boarding-card">
           <div class="details">
               <div class="departing flight-details">
-                  <h3><%= a.departure_city.name %> - <%= a.arrival_city.name %></h3>
+                  <h3><%= a.departure_city.name %> <i class="fas fa-plane small-plane-icon"></i> <%= a.arrival_city.name %></h3>
                   <p><%= a.departure_date.strftime("%A, %d %B %Y") %></p>
-                  <p><%= DateTime.parse(a.full_departure_date).strftime("%H:%M") %></p>
+                  <p><%= DateTime.parse(a.full_departure_date).strftime("%H:%M") %> - <%= DateTime.parse(a.full_arrival_date).strftime("%H:%M") %></p>
                   <p>Duration: <%= a.duration %></p>
-                  <p>Flight <%= a.flight_number %></p>
               </div>
               <div class="returning flight-details">
-                  <h3><%= b.departure_city.name %> - <%= b.arrival_city.name %></h3>
-                  <p><%= b.departure_date.strftime("%A, %d %B %Y") %></p>
-                  <p><%= DateTime.parse(b.full_departure_date).strftime("%H:%M") %></p>
+                  <h3><%= b.departure_city.name %> <i class="fas fa-plane small-plane-icon"></i> <%= b.arrival_city.name %></h3>
+                  <p><%= b.arrival_date.strftime("%A, %d %B %Y") %></p>
+                  <p><%= DateTime.parse(b.full_departure_date).strftime("%H:%M") %>  - <%= DateTime.parse(a.full_arrival_date).strftime("%H:%M") %></p>
                   <p>Duration: <%= b.duration %></p>
-                  <p>Flight <%= b.flight_number %></p>
               </div>
             </div>
             <div class="total-cost">
-                <p class="m-0 p-1">Roundtrip: <%= a.price_cents  %>£</p>
+                <p class="m-0 p-1">Roundtrip: <%= humanized_money_with_symbol(a.price_cents) %></p>
                 <% @counter += a.price_cents %>
             </div>
         </div>
