@@ -12,10 +12,14 @@
         <% arr_time_format = flights.first.arrival_date %>
         <div class=" d-flex">
           <div class="card-body-date">
-            <span class="card-text text-center"><strong><%= dep_time_format.strftime("%d")%> <%= dep_time_format.strftime("%B")%>  -  <%=  arr_time_format.strftime("%d")%> <%= arr_time_format.strftime("%B")%> <%= arr_time_format.strftime("%Y")%> </strong></span>
+            <span class="card-text text-center"><strong><%= dep_time_format.strftime("%d")%> <%= dep_time_format.strftime("%B")%>
+              - <%=  arr_time_format.strftime("%d")%> <%= arr_time_format.strftime("%B")%> <%= arr_time_format.strftime("%Y")%> </strong></span>
           </div>
         </div>
       <% end %>
+      <div style="margin-right: 245px">
+
+      </div>
     </div>
 
 
